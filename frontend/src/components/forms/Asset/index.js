@@ -7,7 +7,8 @@ import { toast } from 'react-toastify';
 
 import ModalCancelButton from 'components/buttons/ModalCancelButton';
 import LoadButton from 'components/buttons/LoadButton';
-import createAsset, { CREATE_ASSET_SUCCESS, CREATE_ASSET_FAILURE } from 'actions/assets/create';
+import createAsset from 'actions/assets/create';
+import updateAsset from 'actions/assets/update';
 import { hideModal } from 'actions/general/modals';
 
 const AssetForm = props => {
@@ -16,7 +17,8 @@ const AssetForm = props => {
     errors,
     isSubmitting,
     handleSubmit,
-    status
+    status,
+    asset
   } = props;
 
   return (
@@ -29,7 +31,7 @@ const AssetForm = props => {
           tag={Field}
           invalid={errors.name && touched.name}
         />
-        <FormFeedback>{errors.username}</FormFeedback>
+        <FormFeedback>{errors.name}</FormFeedback>
       </FormGroup>
       <Row form>
         <Col>
@@ -74,10 +76,10 @@ const AssetForm = props => {
           color="primary"
           type="submit"
           disabled={isSubmitting}
-          width={120}
+          width={140}
           isLoading={isSubmitting}
         >
-          Create Asset
+          {asset ? 'Update' : 'Create'} Asset
         </LoadButton>
       </div>
     </Form>
@@ -85,11 +87,21 @@ const AssetForm = props => {
 }
 
 const FormikForm = withFormik({
-  mapPropsToValues: props => ({
-    name: '',
-    type: 'current',
-    value: ''
-  }),
+  mapPropsToValues: props => {
+    if (props.asset) {
+      return {
+        name: props.asset.name,
+        type: props.asset.type,
+        value: props.asset.value
+      };
+    }
+
+    return {
+      name: '',
+      type: 'current',
+      value: ''
+    }
+  },
 
   validationSchema: Yup.object().shape({
     name: Yup.string().required(),
@@ -98,15 +110,22 @@ const FormikForm = withFormik({
   }),
 
   handleSubmit: async (values, { props, setSubmitting, setStatus }) => {
-    const action = await props.createAsset(values);
+    // Either create a new asset or update an existing one.
+    let actionCreator;
+    if (props.asset)
+      actionCreator = () => props.updateAsset(props.asset.id, values)
+    else
+      actionCreator = () => props.createAsset(values);
+
+    const action = await actionCreator();
     setSubmitting(false);
-    if (action.type === CREATE_ASSET_FAILURE) {
-      setStatus({ error: action.error});
-    } else if (action.type === CREATE_ASSET_SUCCESS) {
-      toast('New asset created');
-      props.hideModal();
-    }
+
+    if (action.type.includes("_ASSET_FAILURE"))
+      return setStatus({ error: action.error});
+
+    toast(props.asset ? `${values.name} updated` : `${values.name} created`);
+    return props.hideModal();
   },
 })(AssetForm);
 
-export default connect(null, { createAsset, hideModal })(FormikForm);
+export default connect(null, { createAsset, updateAsset, hideModal })(FormikForm);

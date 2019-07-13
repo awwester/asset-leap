@@ -1,0 +1,16 @@
+@import "styles/variables";
+
+.asset-row {
+  .edit-asset-icon {
+    display: none;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &:hover {
+    background-color: $light;
+    .edit-asset-icon { display: inline-block; }
+  }
+}
