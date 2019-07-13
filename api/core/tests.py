@@ -9,13 +9,14 @@ class BaseTestCaseMixin(object):
     """
     Create data that should be shared in all of our test cases
     """
-    def setUp(self):
+    @classmethod
+    def setUpTestData(cls):
         # Create users for our test cases.
-        self.admin_user = User.objects.create_superuser(
+        cls.admin_user = User.objects.create_superuser(
             'admin', 'testadmin@asdf.com', 'adminpassword')
-        self.sally_user = User.objects.create_user('sally', 'sally@asdf.com',
+        cls.sally_user = User.objects.create_user('sally', 'sally@asdf.com',
                                                    '12345678')
-        self.roger_user = User.objects.create_user('roger', 'roger@asdf.com',
+        cls.roger_user = User.objects.create_user('roger', 'roger@asdf.com',
                                                    '2424df22')
 
 
