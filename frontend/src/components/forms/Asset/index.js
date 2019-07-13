@@ -1,89 +1,120 @@
 import React from 'react';
 import { withFormik, Field } from 'formik';
-import { Row, Col, Form, FormGroup, Input, FormFeedback, FormText, Label } from 'reactstrap';
+import { Row, Col, Form, FormGroup, Input, FormFeedback, FormText, Label, Button } from 'reactstrap';
 import * as Yup from 'yup';
 import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 import ModalCancelButton from 'components/buttons/ModalCancelButton';
 import LoadButton from 'components/buttons/LoadButton';
 import createAsset from 'actions/assets/create';
 import updateAsset from 'actions/assets/update';
+import deleteAsset, { DELETE_ASSET_SUCCESS } from 'actions/assets/delete';
 import { hideModal } from 'actions/general/modals';
 
-const AssetForm = props => {
-  const {
-    touched,
-    errors,
-    isSubmitting,
-    handleSubmit,
-    status,
-    asset
-  } = props;
+class AssetForm extends React.Component {
+  deleteAsset = async (assetId) => {
+    const action = await this.props.deleteAsset(assetId);
+    if (action.type === DELETE_ASSET_SUCCESS) {
+      toast('Asset deleted successfully');
+      this.props.hideModal();
+    } else {
+      toast.danger('Error deleting asset.');
+    }
+  }
 
-  return (
-    <Form onSubmit={handleSubmit} className="p-4">
-      <FormGroup>
-        <Label>Asset name</Label>
-        <Input
-          placeholder="citibank, house, etrade, etc"
-          name="name"
-          tag={Field}
-          invalid={errors.name && touched.name}
-        />
-        <FormFeedback>{errors.name}</FormFeedback>
-      </FormGroup>
-      <Row form>
-        <Col>
-          <FormGroup>
-            <Label>Asset type</Label>
-            <Input
-              type="select"
-              component="select"
-              placeholder="type"
-              name="type"
-              tag={Field}
-              invalid={errors.type && touched.type}
-            >
-              <option value="current">Current</option>
-              <option value="fixed">Fixed</option>
-              <option value="finance">Financial</option>
-            </Input>
+  render() {
+    const {
+      touched,
+      errors,
+      isSubmitting,
+      handleSubmit,
+      status,
+      asset
+    } = this.props;
 
-            <FormFeedback>{errors.type}</FormFeedback>
-          </FormGroup>
-        </Col>
-        <Col>
-          <FormGroup>
-            <Label>Value amount</Label>
-            <Input
-              name="value"
-              tag={Field}
-              invalid={errors.value && touched.value}
-            />
-            <FormFeedback>{errors.value}</FormFeedback>
-          </FormGroup>
-        </Col>
-      </Row>
+    const renderDeleteAsset = () => {
+      if (!asset)
+        return null;
 
-      <FormText color="danger" className="text-center mb-3">
-        {status ? status.error : ''}
-      </FormText>
-
-      <div className="button-container text-right">
-        <ModalCancelButton />
-        <LoadButton
-          color="primary"
-          type="submit"
-          disabled={isSubmitting}
-          width={140}
-          isLoading={isSubmitting}
+      return (
+        <Button
+          color="danger"
+          className="float-left"
+          onClick={() => this.deleteAsset(this.props.asset.id)}
         >
-          {asset ? 'Update' : 'Create'} Asset
-        </LoadButton>
-      </div>
-    </Form>
-  );
+          <FontAwesomeIcon icon={faTrash} />
+        </Button>
+      );
+    }
+
+    return (
+      <Form onSubmit={handleSubmit} className="p-4">
+        <FormGroup>
+          <Label>Asset name</Label>
+          <Input
+            placeholder="citibank, house, etrade, etc"
+            name="name"
+            tag={Field}
+            invalid={errors.name && touched.name}
+          />
+          <FormFeedback>{errors.name}</FormFeedback>
+        </FormGroup>
+        <Row form>
+          <Col>
+            <FormGroup>
+              <Label>Asset type</Label>
+              <Input
+                type="select"
+                component="select"
+                placeholder="type"
+                name="type"
+                tag={Field}
+                invalid={errors.type && touched.type}
+              >
+                <option value="current">Current</option>
+                <option value="fixed">Fixed</option>
+                <option value="finance">Financial</option>
+              </Input>
+
+              <FormFeedback>{errors.type}</FormFeedback>
+            </FormGroup>
+          </Col>
+          <Col>
+            <FormGroup>
+              <Label>Value amount</Label>
+              <Input
+                name="value"
+                tag={Field}
+                invalid={errors.value && touched.value}
+              />
+              <FormFeedback>{errors.value}</FormFeedback>
+            </FormGroup>
+          </Col>
+        </Row>
+
+        <FormText color="danger" className="text-center mb-3">
+          {status ? status.error : ''}
+        </FormText>
+
+        {renderDeleteAsset()}
+        <div className="button-container text-right">
+          <ModalCancelButton />
+          <LoadButton
+            color="primary"
+            type="submit"
+            disabled={isSubmitting}
+            width={140}
+            isLoading={isSubmitting}
+          >
+            {asset ? 'Update' : 'Create'} Asset
+          </LoadButton>
+        </div>
+      </Form>
+    );
+  }
 }
 
 const FormikForm = withFormik({
@@ -128,4 +159,4 @@ const FormikForm = withFormik({
   },
 })(AssetForm);
 
-export default connect(null, { createAsset, updateAsset, hideModal })(FormikForm);
+export default connect(null, { createAsset, updateAsset, deleteAsset, hideModal })(FormikForm);
