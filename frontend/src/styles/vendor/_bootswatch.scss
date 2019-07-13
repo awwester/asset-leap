@@ -1,39 +1,80 @@
-// Flatly 4.3.1
+// Minty 4.3.1
 // Bootswatch
 
 
 // Variables ===================================================================
 
-$web-font-path: "https://fonts.googleapis.com/css?family=Lato:400,700,400italic" !default;
+$web-font-path: "https://fonts.googleapis.com/css?family=Montserrat" !default;
 @import url($web-font-path);
 
-// Navbar =======================================================================
+// Navbar ======================================================================
 
-.bg-primary {
-  .navbar-nav .active > .nav-link {
-    color: $success !important;
-  }
+.navbar {
+  font-family: $headings-font-family;
 }
 
 .bg-dark {
-  background-color: $success !important;
-  &.navbar-dark .navbar-nav {
-    .nav-link:focus,
-    .nav-link:hover,
-    .active > .nav-link {
-      color: $primary !important;
-    }
-  }
+  background-color: $secondary !important;
+}
+
+.border-dark {
+  border-color: $secondary !important;
 }
 
 // Buttons =====================================================================
 
 .btn {
-  &-secondary,
-  &-secondary:hover,
-  &-warning,
-  &-warning:hover {
-    color: #fff;
+  font-family: $headings-font-family;
+
+  &,
+  &:hover {
+    color: $white;
+  }
+
+  &-light,
+  &-light:hover {
+    color: $gray-700;
+  }
+
+  &-link,
+  &-link:hover {
+    color: $primary;
+  }
+
+  &-link.disabled:hover {
+    color: $gray-600;
+  }
+
+  &-outline-primary {
+    color: $primary;
+  }
+
+  &-outline-secondary {
+    color: $secondary;
+  }
+
+  &-outline-success {
+    color: $success;
+  }
+
+  &-outline-info {
+    color: $info;
+  }
+
+  &-outline-warning {
+    color: $warning;
+  }
+
+  &-outline-danger {
+    color: $danger;
+  }
+
+  &-outline-dark {
+    color: $dark;
+  }
+
+  &-outline-light {
+    color: $light;
   }
 }
 
@@ -161,87 +202,124 @@ $web-font-path: "https://fonts.googleapis.com/css?family=Lato:400,700,400italic"
         background-color: $table-active-bg;
       }
     }
+  }
 
+  .thead-dark th {
+    background-color: $primary;
+    border-color: $table-border-color;
+    font-family: $headings-font-family;
   }
 }
 
 // Forms =======================================================================
 
-// Navs ========================================================================
-
-.nav-tabs {
-  .nav-link.active,
-  .nav-link.active:focus,
-  .nav-link.active:hover,
-  .nav-item.open .nav-link,
-  .nav-item.open .nav-link:focus,
-  .nav-item.open .nav-link:hover {
-    color: $primary;
-  }
+legend {
+  font-family: $headings-font-family;
 }
 
-.pagination {
+// Navs ========================================================================
+
+.dropdown-menu {
+  font-family: $font-family-sans-serif;
+}
+
+.breadcrumb {
+  a {
+    color: $navbar-dark-color;
+  }
+
   a:hover {
+    color: $white;
     text-decoration: none;
   }
 }
 
 // Indicators ==================================================================
 
-.close {
-  text-decoration: none;
-  opacity: 0.4;
-
-  &:hover,
-  &:focus {
-    opacity: 1;
-  }
-}
-
-.badge {
-  &-secondary,
-  &-warning {
-    color: #fff;
-  }
-}
-
 .alert {
-  border: none;
   color: $white;
+
+  h1, h2, h3, h4, h5, h6 {
+    color: inherit;
+  }
 
   a,
   .alert-link {
-    color: #fff;
-    text-decoration: underline;
+    color: $white;
   }
 
-  @each $color, $value in $theme-colors {
-    &-#{$color} {
-      @if $enable-gradients {
-        background: $value linear-gradient(180deg, mix($body-bg, $value, 15%), $value) repeat-x;
-      } @else {
-        background-color: $value;
-      }
+  &-primary {
+    &, > th, > td {
+      background-color: $primary;
+    }
+  }
+
+  &-secondary {
+    &, > th, > td {
+      background-color: $secondary;
+    }
+  }
+
+  &-success {
+    &, > th, > td {
+      background-color: $success;
+    }
+  }
+
+  &-info {
+    &, > th, > td {
+      background-color: $info;
+    }
+  }
+
+  &-danger {
+    &, > th, > td {
+      background-color: $danger;
+    }
+  }
+
+  &-warning {
+    &, > th, > td {
+      background-color: $warning;
+    }
+  }
+
+  &-dark {
+    &, > th, > td {
+      background-color: $dark;
+    }
+  }
+
+  &-light {
+    &, > th, > td {
+      background-color: $light;
     }
   }
 
   &-light {
     &,
-    & a,
+    & a:not(.btn),
     & .alert-link {
       color: $body-color;
     }
   }
 }
 
+.badge {
+  color: $white;
+
+  &-light {
+    color: $gray-700;
+  }
+}
+
 // Progress bars ===============================================================
 
 // Containers ==================================================================
-.modal .close{
-  color: $black;
 
-  &:not(:disabled):not(.disabled):hover,
-  &:not(:disabled):not(.disabled):focus {
-    color: $black;
+.card,
+.list-group-item {
+  h1, h2, h3, h4, h5, h6 {
+    color: inherit;
   }
 }
