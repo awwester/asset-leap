@@ -33,10 +33,10 @@ class DashboardRouter extends React.Component {
           </div>
           <nav className="sidenav">
             <section className="menu-section">
-            <NavLink exact to="/dashboard/statements">
-              <FontAwesomeIcon icon={faChartLine} /> Statements
-            </NavLink>
-            <NavLink exact to="/dashboard/assets">
+              <NavLink exact to="/dashboard/statements">
+                <FontAwesomeIcon icon={faChartLine} /> Statements
+              </NavLink>
+              <NavLink exact to="/dashboard/assets">
                 <FontAwesomeIcon icon={faDollarSign} /> Assets
               </NavLink>
               <NavLink exact to="/dashboard/liabilities">
