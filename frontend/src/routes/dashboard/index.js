@@ -5,6 +5,7 @@ import { NavLink, Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFrog, faDollarSign, faHouseDamage, faLock, faChartLine } from '@fortawesome/free-solid-svg-icons';
 
+import fetchAssets from 'actions/assets/fetch';
 import logoutUser from 'actions/auth/logout';
 import StatementsRoute from './Statements';
 import AssetsRoute from './Assets';
@@ -17,6 +18,12 @@ class DashboardRouter extends React.Component {
     const { history } = this.props;
     if (!this.props.session.token) history.push('/');
     if (history.location.pathname === '/dashboard') history.push('/dashboard/statements');
+
+    this.loadInitialData();
+  }
+
+  loadInitialData = () => {
+    this.props.fetchAssets();
   }
 
   logout = () => {
@@ -62,4 +69,4 @@ class DashboardRouter extends React.Component {
 }
 
 const mapStateToProps = ({ session }) => ({ session });
-export default connect(mapStateToProps, { logoutUser })(DashboardRouter);
+export default connect(mapStateToProps, { logoutUser, fetchAssets })(DashboardRouter);

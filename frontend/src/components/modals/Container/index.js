@@ -1,14 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import WelcomeModal from '../Welcome';
+import AssetModal from '../Asset';
 import { hideModal } from 'actions/general/modals';
 
 class ModalContainer extends React.Component {
   // class to handle rendering modals at the application level.
 
   modalComponents = {
-    welcome: WelcomeModal
+    asset: AssetModal
   }
 
   render() {

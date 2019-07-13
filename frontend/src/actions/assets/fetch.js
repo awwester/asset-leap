@@ -10,13 +10,12 @@ const fetchAssetsSuccess = data => ({ type: FETCH_ASSETS_SUCCESS, data });
 export const FETCH_ASSETS_FAILURE = 'FETCH_ASSETS_FAILURE';
 const fetchAssetsFailure = () => ({ type: FETCH_ASSETS_FAILURE });
 
-export default () => dispatch => {
+export default () => (dispatch) => {
   dispatch(fetchAssetsStart());
   const url = `${config.apiUrl}assets/`;
 
-  return axios.get(url)
-    .then(
-      success => dispatch(fetchAssetsSuccess(success.data)),
-      error => dispatch(fetchAssetsFailure())
-    );
+  return axios.get(url).then(
+    success => dispatch(fetchAssetsSuccess(success.data)),
+    error => dispatch(fetchAssetsFailure('Error fetching assets.'))
+  );
 };

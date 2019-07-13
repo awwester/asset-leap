@@ -1,4 +1,5 @@
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.permissions import IsAuthenticated
 
 from .serializers import AssetSerializer
 from .models import Asset
@@ -6,6 +7,7 @@ from .models import Asset
 
 class AssetViewSet(ModelViewSet):
     serializer_class = AssetSerializer
+    permission_classes = (IsAuthenticated,)
 
     def perform_create(self, serializer):
         """Save the user to the asset object."""
