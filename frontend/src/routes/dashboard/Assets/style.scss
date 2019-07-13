@@ -20,4 +20,8 @@
     border-top-right-radius: 3px;
     border-bottom: 3px solid darken($secondary, 5);
   }
+
+  .asset-type-footer {
+    border-top: 3px solid $light;
+  }
 }
