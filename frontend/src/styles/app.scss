@@ -1,10 +1,10 @@
 // main scss file for all global styling.
 
 @import "./variables";
-@import "styles/vendor/theme";
 @import "bootstrap/scss/bootstrap";
 @import "styles/vendor/bootswatch";
 
+
 body {
-  
+  font-family: "Lato", Arial, sans-serif;
 }
