@@ -17,9 +17,7 @@ export default (state = initialState, action) => {
       return { ...state, isLoading: false, data: action.data };
     case FETCH_ASSETS_FAILURE:
     case CREATE_ASSET_FAILURE:
-      return { ...state, isLoading: false, error: data.error };
-    case LOGOUT:
-      return initialState;
+      return { ...state, isLoading: false, error: action.error };
     default:
       return state;
   }

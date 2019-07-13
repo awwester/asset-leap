@@ -54,11 +54,11 @@ const AssetForm = props => {
           <FormGroup>
             <Label>Value amount</Label>
             <Input
-              name="amount"
+              name="value"
               tag={Field}
-              invalid={errors.amount && touched.amount}
+              invalid={errors.value && touched.value}
             />
-            <FormFeedback>{errors.amount}</FormFeedback>
+            <FormFeedback>{errors.value}</FormFeedback>
           </FormGroup>
         </Col>
       </Row>
