@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     # project apps
     'accounts',
     'assets',
+    'liabilities',
     'core',
 ]
 
