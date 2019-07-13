@@ -1,3 +1,5 @@
+@import "styles/variables";
+
 .assets-route {
   .dashboard-container {
     margin-top: 15px;
@@ -6,5 +8,15 @@
     .asset-type-name {
       text-transform: capitalize;
     }
+  }
+
+  .asset-type-name {
+    background-color: $secondary;
+    color: white;
+    margin: -15px;
+    margin-bottom: 20px;
+    padding: 15px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
   }
 }

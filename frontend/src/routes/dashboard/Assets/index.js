@@ -28,12 +28,14 @@ class AssetsRoute extends React.Component {
       const assets = assetData.filter((asset) => asset.type === assetType);
       if (assets.length === 0) return null;
 
-      return <Col sm={6}>
-        <DashboardContainer className={`asset-type-container ${assetType}-assets`}>
-          <h4 className="asset-type-name">{assetType} Assets</h4>
-          {assets.map((asset) => <AssetRow key={asset.id} asset={asset} />)}
-        </DashboardContainer>
-      </Col>
+      return (
+        <Col md={6} sm={12}>
+          <DashboardContainer className={`asset-type-container ${assetType}-assets`}>
+            <h4 className="asset-type-name">{assetType} Assets</h4>
+            {assets.map((asset) => <AssetRow key={asset.id} asset={asset} />)}
+          </DashboardContainer>
+        </Col>
+      );
     }
 
     return (
@@ -51,7 +53,7 @@ class AssetsRoute extends React.Component {
         <Row>
           {renderAssets('current')}
           {renderAssets('fixed')}
-          {renderAssets('financial')}
+          {renderAssets('finance')}
         </Row>
       </Container>
     );

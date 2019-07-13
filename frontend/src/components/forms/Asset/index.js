@@ -8,6 +8,7 @@ import { toast } from 'react-toastify';
 import ModalCancelButton from 'components/buttons/ModalCancelButton';
 import LoadButton from 'components/buttons/LoadButton';
 import createAsset, { CREATE_ASSET_SUCCESS, CREATE_ASSET_FAILURE } from 'actions/assets/create';
+import { hideModal } from 'actions/general/modals';
 
 const AssetForm = props => {
   const {
@@ -44,7 +45,7 @@ const AssetForm = props => {
             >
               <option value="current">Current</option>
               <option value="fixed">Fixed</option>
-              <option value="financial">Financial</option>
+              <option value="finance">Financial</option>
             </Input>
 
             <FormFeedback>{errors.type}</FormFeedback>
@@ -87,13 +88,13 @@ const FormikForm = withFormik({
   mapPropsToValues: props => ({
     name: '',
     type: 'current',
-    amount: ''
+    value: ''
   }),
 
   validationSchema: Yup.object().shape({
     name: Yup.string().required(),
     type: Yup.string().required(),
-    amount: Yup.number().integer().required()
+    value: Yup.number().integer().required()
   }),
 
   handleSubmit: async (values, { props, setSubmitting, setStatus }) => {
@@ -103,8 +104,9 @@ const FormikForm = withFormik({
       setStatus({ error: action.error});
     } else if (action.type === CREATE_ASSET_SUCCESS) {
       toast('New asset created');
+      props.hideModal();
     }
   },
 })(AssetForm);
 
-export default connect(null, { createAsset })(FormikForm);
+export default connect(null, { createAsset, hideModal })(FormikForm);

@@ -13,8 +13,9 @@ export default (state = initialState, action) => {
     case CREATE_ASSET_START:
       return { ...state, isLoading: true, error: '' };
     case FETCH_ASSETS_SUCCESS:
-    case CREATE_ASSET_SUCCESS:
       return { ...state, isLoading: false, data: action.data };
+    case CREATE_ASSET_SUCCESS:
+      return { ...state, isLoading: false, data: [ ...state.data, action.data ] };
     case FETCH_ASSETS_FAILURE:
     case CREATE_ASSET_FAILURE:
       return { ...state, isLoading: false, error: action.error };
