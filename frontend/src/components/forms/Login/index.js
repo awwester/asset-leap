@@ -72,15 +72,14 @@ const FormikForm = withFormik({
     password: Yup.string().required()
   }),
 
-  handleSubmit: (values, { props, setSubmitting, setStatus }) => {
-    props.loginUser(values).then(action => {
-      setSubmitting(false);
-      if (action.type === LOGIN_FAILURE) {
-        setStatus({ error: 'Unable to login with the provided credentials.'});
-      } else if (action.type === LOGIN_SUCCESS) {
-        props.history.push('/dashboard');
-      }
-    });
+  handleSubmit: async (values, { props, setSubmitting, setStatus }) => {
+    const action = await props.loginUser(values);
+    setSubmitting(false);
+    if (action.type === LOGIN_FAILURE) {
+      setStatus({ error: 'Unable to login with the provided credentials.'});
+    } else if (action.type === LOGIN_SUCCESS) {
+      props.history.push('/dashboard/statements');
+    }
   },
 })(LoginForm);
 

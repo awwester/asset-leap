@@ -1,4 +1,5 @@
 import { LOGIN_START, LOGIN_SUCCESS, LOGIN_FAILURE } from 'actions/auth/login';
+import { REGISTER_SUCCESS } from 'actions/auth/register';
 import { LOGOUT } from 'actions/auth/logout';
 
 const initialState = {
@@ -12,6 +13,7 @@ export default (state = initialState, action) => {
     case LOGIN_START:
       return { ...state, isLoading: true, error: '' };
     case LOGIN_SUCCESS:
+    case REGISTER_SUCCESS:
       return {
         ...state,
         isLoading: false,

@@ -14,7 +14,9 @@ import './style.scss';
 class DashboardRouter extends React.Component {
   componentDidMount() {
     // Require authentication for the dashboard.
-    if (!this.props.session.token) this.props.history.push('/');
+    const { history } = this.props;
+    if (!this.props.session.token) history.push('/');
+    if (history.location.pathname === '/dashboard') history.push('/dashboard/statements');
   }
 
   logout = () => {

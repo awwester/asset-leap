@@ -6,7 +6,7 @@ import { Form, Button, FormGroup, Input, FormFeedback, FormText
 import * as Yup from 'yup';
 import { connect } from 'react-redux';
 
-import { registerUser, REGISTER_SUCCESS, REGISTER_FAILURE } from 'actions/auth/register';
+import registerUser, { REGISTER_SUCCESS, REGISTER_FAILURE } from 'actions/auth/register';
 
 const RegisterForm = props => {
   const {
@@ -115,15 +115,14 @@ const FormikForm = withFormik({
     password2: Yup.string().required(),
   }),
 
-  handleSubmit: (values, { props, setSubmitting, setStatus }) => {
-    props.registerUser(values).then(action => {
-      setSubmitting(false);
-      if (action.type === REGISTER_FAILURE) {
-        setStatus({ error: 'Unable to register with the provided data.'});
-      } else if (action.type === REGISTER_SUCCESS) {
-        props.history.push('/dashboard');
-      }
-    });
+  handleSubmit: async (values, { props, setSubmitting, setStatus }) => {
+    const action = await props.registerUser(values);
+    setSubmitting(false);
+    if (action.type === REGISTER_FAILURE) {
+      setStatus({ error: 'Unable to register with the provided data.'});
+    } else if (action.type === REGISTER_SUCCESS) {
+      props.history.push('/dashboard/statements');
+    }
   },
 })(RegisterForm);
 
