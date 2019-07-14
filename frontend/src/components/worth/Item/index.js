@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 
 import { showModal } from 'actions/general/modals';
+import currency from 'utils/currency';
 
 import './style.scss';
 
@@ -18,7 +19,7 @@ class ItemRow extends React.Component {
         <Col sm={6}>
           <strong className="mr-4">{worthItem.name}</strong>
         </Col>
-        <Col sm={4}>${worthItem.value}</Col>
+        <Col sm={4}>{currency(worthItem.value)}</Col>
         <Col sm={2}>
           <div className="float-right">
             <FontAwesomeIcon

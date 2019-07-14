@@ -13,7 +13,7 @@ import createworthItem from 'actions/worthItems/create';
 import updateworthItem from 'actions/worthItems/update';
 import deleteworthItem from 'actions/worthItems/delete';
 import { hideModal } from 'actions/general/modals';
-import { capitalize } from 'utils/capitalize';
+import capitalize from 'utils/capitalize';
 
 class worthItemForm extends React.Component {
   deleteworthItem = (worthItemId) => {

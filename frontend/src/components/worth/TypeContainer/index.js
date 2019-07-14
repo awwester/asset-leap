@@ -3,6 +3,7 @@ import { Row, Col } from 'reactstrap';
 
 import DashboardContainer from 'components/dashboard/Container';
 import WorthItem from 'components/worth/Item';
+import currency from 'utils/currency';
 import './style.scss'
 
 export default ({ worthItems, type }) => {
@@ -39,7 +40,7 @@ export default ({ worthItems, type }) => {
         {worthItems.map((worthItem) => <WorthItem key={worthItem.id} worthItem={worthItem} />)}
         <Row className="worth-type-footer pt-3 px-3">
           <Col sm={6}><strong>Total</strong></Col>
-          <Col sm={4}><strong>${sum}</strong></Col>
+          <Col sm={4}><strong>{currency(sum)}</strong></Col>
           <Col sm={2} />
         </Row>
       </DashboardContainer>

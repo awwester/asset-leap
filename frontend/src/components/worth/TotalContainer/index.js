@@ -1,6 +1,6 @@
 import React from 'react';
 import { Row, Col } from 'reactstrap';
-
+import currency from 'utils/currency';
 import './style.scss'
 
 export default ({ worthItems, category }) => {
@@ -15,7 +15,7 @@ export default ({ worthItems, category }) => {
   return (
     <Row className="worth-total-container text-center my-5">
       <Col>
-        <h2>Total {category} <strong>${worthTotal}</strong></h2>
+        <h2>Total {category} <strong>{currency(worthTotal)}</strong></h2>
       </Col>
     </Row>
   );
