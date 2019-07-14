@@ -10,9 +10,17 @@ class LoadButton extends React.Component {
   render() {
     const { width, isLoading, spinnerColor, ...rest } = this.props;
 
+    const spinnerStyle = {
+      width: "1.5rem",
+      height: "1.5rem",
+      borderWidth: "0.1rem"
+    }
+
     return (
       <Button { ...rest } style={{ width: width || 150 }}>
-        {isLoading ? <Loading color={spinnerColor || "light"} size="sm" /> : this.props.children }
+        {isLoading ?
+          <Loading color={spinnerColor || "light"} style={spinnerStyle} /> :
+          this.props.children}
       </Button>
     );
   }

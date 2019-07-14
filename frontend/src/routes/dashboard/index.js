@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFrog, faDollarSign, faHouseDamage, faLock, faChartLine } from '@fortawesome/free-solid-svg-icons';
 
 import fetchAssets from 'actions/assets/fetch';
+import fetchLiabilities from 'actions/liabilities/fetch';
 import logoutUser from 'actions/auth/logout';
 import StatementsRoute from './Statements';
 import AssetsRoute from './Assets';
@@ -24,6 +25,7 @@ class DashboardRouter extends React.Component {
 
   loadInitialData = () => {
     this.props.fetchAssets();
+    this.props.fetchLiabilities();
   }
 
   logout = () => {
@@ -69,4 +71,6 @@ class DashboardRouter extends React.Component {
 }
 
 const mapStateToProps = ({ session }) => ({ session });
-export default connect(mapStateToProps, { logoutUser, fetchAssets })(DashboardRouter);
+export default connect(mapStateToProps, {
+  logoutUser, fetchAssets, fetchLiabilities
+})(DashboardRouter);

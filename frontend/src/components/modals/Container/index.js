@@ -2,13 +2,15 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import AssetModal from '../Asset';
+import LiabilityModal from '../Liability';
 import { hideModal } from 'actions/general/modals';
 
 class ModalContainer extends React.Component {
   // class to handle rendering modals at the application level.
 
   modalComponents = {
-    asset: AssetModal
+    asset: AssetModal,
+    liability: LiabilityModal,
   }
 
   render() {

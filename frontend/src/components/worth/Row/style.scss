@@ -1,7 +1,7 @@
 @import "styles/variables";
 
-.asset-row {
-  .edit-asset-icon {
+.item-row {
+  .edit-item-icon {
     display: none;
 
     &:hover {
@@ -11,6 +11,6 @@
 
   &:hover {
     background-color: $light;
-    .edit-asset-icon { display: inline-block; }
+    .edit-item-icon { display: inline-block; }
   }
 }

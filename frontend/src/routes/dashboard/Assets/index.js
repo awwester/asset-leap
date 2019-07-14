@@ -1,14 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Container, Button, Row, Col } from 'reactstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 
 import { showModal } from 'actions/general/modals';
 import DashboardHeader from 'components/dashboard/Header';
-import DashboardContainer from 'components/dashboard/Container';
 import WorthTypeContainer from 'components/worth/TypeContainer';
 import WorthTotalContainer from 'components/worth/TotalContainer';
+import EmptyItemsContainer from 'components/worth/EmptyItemsContainer';
 import './style.scss';
 
 class AssetsRoute extends React.Component {
@@ -17,12 +15,7 @@ class AssetsRoute extends React.Component {
 
     const renderEmptyAssets = () => {
       if (assetData.length === 0)
-        return (
-          <DashboardContainer>
-            <FontAwesomeIcon icon={faExclamationCircle} className="warning-icon" />
-            You don't have any assets yet.
-          </DashboardContainer>
-        );
+        return <EmptyItemsContainer category="liabilities" />;
     }
 
     const renderAssets = (assetType) => {

@@ -1,0 +1,22 @@
+@import "styles/variables";
+
+.worth-type-container {
+  margin-top: 15px;
+  margin-bottom: 15px;
+
+  .worth-type-name {
+    text-transform: capitalize;
+    background-color: $secondary;
+    color: white;
+    margin: -15px;
+    margin-bottom: 20px;
+    padding: 15px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom: 3px solid darken($secondary, 5);
+  }
+
+  .worth-type-footer {
+    border-top: 3px solid $light;
+  }
+}

@@ -5,11 +5,11 @@ import AssetForm from 'components/forms/Asset';
 
 class AssetModal extends React.Component {
   render() {
-    const { asset, ...rest } = this.props;
+    const { item, ...rest } = this.props;
     return (
       <Modal { ...rest } className="asset-modal">
         <ModalBody>
-          <AssetForm asset={asset} />
+          <AssetForm asset={item} />
         </ModalBody>
       </Modal>
     );
