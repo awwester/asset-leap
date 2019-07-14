@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import sys
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -53,12 +54,13 @@ INSTALLED_APPS = [
 
     # project apps
     'accounts',
-    'assets',
-    'liabilities',
+    'worth',
     'core',
 ]
 
 SITE_ID = 1
+
+TEST_MODE = 'test' in sys.argv
 
 AUTH_USER_MODEL = 'accounts.User'
 
@@ -71,6 +73,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'core.middleware.delay_middleware',
 ]
 
 ROOT_URLCONF = 'api.urls'
@@ -146,4 +149,8 @@ REST_FRAMEWORK = {
     },
 }
 
+
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+JSON_RESPONSE_DELAY = 0

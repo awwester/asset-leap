@@ -5,3 +5,6 @@ if you wish in that file.
 """
 
 from .base import *
+
+
+JSON_RESPONSE_DELAY = 1
