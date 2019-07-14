@@ -11,20 +11,18 @@ import ModalCancelButton from 'components/buttons/ModalCancelButton';
 import LoadButton from 'components/buttons/LoadButton';
 import createworthItem from 'actions/worthItems/create';
 import updateworthItem from 'actions/worthItems/update';
-import deleteworthItem, { DELETE_WORTH_ITEM_SUCCESS } from 'actions/worthItems/delete';
+import deleteworthItem from 'actions/worthItems/delete';
 import { hideModal } from 'actions/general/modals';
 import { capitalize } from 'utils/capitalize';
 
 class worthItemForm extends React.Component {
-  deleteworthItem = async (worthItemId) => {
-    const action = await this.props.deleteworthItem(worthItemId);
-    if (action.type === DELETE_WORTH_ITEM_SUCCESS) {
-      toast('worthItem deleted successfully');
-      this.props.hideModal();
-    } else {
-      toast.danger('Error deleting worthItem.');
-    }
+  deleteworthItem = (worthItemId) => {
+    this.props.deleteworthItem(worthItemId);
+    toast(`${capitalize(this.category)} deleted successfully`);
+    this.props.hideModal();
   }
+
+  category = this.props.category || this.props.worthItem.category;
 
   render() {
     const {
@@ -36,7 +34,6 @@ class worthItemForm extends React.Component {
       worthItem
     } = this.props;
 
-    const category = this.props.category || worthItem.category;
     const renderDeleteworthItem = () => {
       if (!worthItem)
         return null;
@@ -53,7 +50,7 @@ class worthItemForm extends React.Component {
     }
 
     const renderSelectControl = () => {
-      if (category === "asset") {
+      if (this.category === "asset") {
         return (
           <Input
             type="select"
@@ -88,7 +85,7 @@ class worthItemForm extends React.Component {
     return (
       <Form onSubmit={handleSubmit} className="p-4">
         <FormGroup>
-          <Label>{capitalize(category)} name</Label>
+          <Label>{capitalize(this.category)} name</Label>
           <Input
             placeholder="citibank, house, etrade, etc"
             name="name"
@@ -100,7 +97,7 @@ class worthItemForm extends React.Component {
         <Row form>
           <Col>
             <FormGroup>
-              <Label>{capitalize(category)} type</Label>
+              <Label>{capitalize(this.category)} type</Label>
               {renderSelectControl()}
               <FormFeedback>{errors.type}</FormFeedback>
             </FormGroup>
@@ -132,7 +129,7 @@ class worthItemForm extends React.Component {
             width={140}
             isLoading={isSubmitting}
           >
-            {worthItem ? 'Update' : 'Create'} {category}
+            {worthItem ? 'Update' : 'Create'} {this.category}
           </LoadButton>
         </div>
       </Form>
@@ -152,7 +149,7 @@ const FormikForm = withFormik({
 
     return {
       name: '',
-      type: 'current_asset',
+      type: props.category === "asset" ? "current_asset" : "current_liab",
       value: ''
     }
   },

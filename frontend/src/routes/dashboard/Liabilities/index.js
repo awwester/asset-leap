@@ -12,7 +12,6 @@ import './style.scss';
 class LiabilitiesRoute extends React.Component {
   render() {
     const liabilityData = this.props.worthItems.data.filter(item => item.category === 'liability');
-    console.log(liabilityData)
     const renderEmptyLiabilities = () => {
       if (liabilityData.length === 0)
         return <EmptyItemsContainer />;
