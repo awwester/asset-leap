@@ -9,7 +9,6 @@ const initialState = {
 
 export default (state = initialState, action) => {
   // data that should be manipulated and replaced in the data.
-  let newData = state.data;
   switch (action.type) {
     case FETCH_STATEMENTS_START:
       return { ...state, isLoading: true, error: '' };
