@@ -1,7 +1,7 @@
-import { FETCH_ASSETS_START,FETCH_ASSETS_SUCCESS, FETCH_ASSETS_FAILURE } from 'actions/assets/fetch';
-import { CREATE_ASSET_START, CREATE_ASSET_SUCCESS, CREATE_ASSET_FAILURE } from 'actions/assets/create';
-import { UPDATE_ASSET_START, UPDATE_ASSET_SUCCESS, UPDATE_ASSET_FAILURE } from 'actions/assets/update';
-import { DELETE_ASSET_START } from 'actions/assets/delete';
+import { FETCH_WORTH_ITEMS_START,FETCH_WORTH_ITEMS_SUCCESS, FETCH_WORTH_ITEMS_FAILURE } from 'actions/worthItems/fetch';
+import { CREATE_WORTH_ITEM_START, CREATE_WORTH_ITEM_SUCCESS, CREATE_WORTH_ITEM_FAILURE } from 'actions/worthItems/create';
+import { UPDATE_WORTH_ITEM_START, UPDATE_WORTH_ITEM_SUCCESS, UPDATE_WORTH_ITEM_FAILURE } from 'actions/worthItems/update';
+import { DELETE_WORTH_ITEM_START } from 'actions/worthItems/delete';
 
 const initialState = {
   data: [],
@@ -13,25 +13,25 @@ export default (state = initialState, action) => {
   // data that should be manipulated and replaced in the data.
   let newData = state.data;
   switch (action.type) {
-    case FETCH_ASSETS_START:
-    case CREATE_ASSET_START:
-    case UPDATE_ASSET_START:
+    case FETCH_WORTH_ITEMS_START:
+    case CREATE_WORTH_ITEM_START:
+    case UPDATE_WORTH_ITEM_START:
       return { ...state, isLoading: true, error: '' };
-    case DELETE_ASSET_START:
+    case DELETE_WORTH_ITEM_START:
       newData = newData.filter((asset) => asset.id !== action.assetId)
       return { ...state, data: newData };
-    case FETCH_ASSETS_SUCCESS:
+    case FETCH_WORTH_ITEMS_SUCCESS:
       return { ...state, isLoading: false, data: action.data };
-    case CREATE_ASSET_SUCCESS:
+    case CREATE_WORTH_ITEM_SUCCESS:
       return { ...state, isLoading: false, data: [ ...state.data, action.data ] };
-    case UPDATE_ASSET_SUCCESS:
+    case UPDATE_WORTH_ITEM_SUCCESS:
       newData = newData.map((asset) => {
         return asset.id === action.data.id ? action.data : asset;
       });
       return { ...state, isLoading: false, data: newData };
-    case UPDATE_ASSET_FAILURE:
-    case FETCH_ASSETS_FAILURE:
-    case CREATE_ASSET_FAILURE:
+    case UPDATE_WORTH_ITEM_FAILURE:
+    case FETCH_WORTH_ITEMS_FAILURE:
+    case CREATE_WORTH_ITEM_FAILURE:
       return { ...state, isLoading: false, error: action.error };
     default:
       return state;

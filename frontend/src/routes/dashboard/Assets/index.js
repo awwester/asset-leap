@@ -11,7 +11,7 @@ import './style.scss';
 
 class AssetsRoute extends React.Component {
   render() {
-    const assetData = this.props.assets.data;
+    const assetData = this.props.worthItems.data.filter(item => item.category === 'asset');
 
     const renderEmptyAssets = () => {
       if (assetData.length === 0)
@@ -52,5 +52,5 @@ class AssetsRoute extends React.Component {
   }
 }
 
-const mapStateToProps = ({ assets }) => ({ assets });
+const mapStateToProps = ({ worthItems }) => ({ worthItems });
 export default connect(mapStateToProps, { showModal })(AssetsRoute);

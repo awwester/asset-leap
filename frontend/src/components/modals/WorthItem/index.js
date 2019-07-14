@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal, ModalBody } from 'reactstrap';
 
-import AssetForm from 'components/forms/Asset';
+import WorthItemForm from 'components/forms/WorthItem';
 
 class AssetModal extends React.Component {
   render() {
@@ -9,7 +9,7 @@ class AssetModal extends React.Component {
     return (
       <Modal { ...rest } className="asset-modal">
         <ModalBody>
-          <AssetForm asset={item} />
+          <WorthItemForm asset={item} />
         </ModalBody>
       </Modal>
     );

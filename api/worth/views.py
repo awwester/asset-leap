@@ -1,12 +1,12 @@
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated
 
-from .serializers import AssetSerializer
-from .models import Asset
+from .serializers import ItemSerializer
+from .models import Item
 
 
-class AssetViewSet(ModelViewSet):
-    serializer_class = AssetSerializer
+class ItemViewSet(ModelViewSet):
+    serializer_class = ItemSerializer
     permission_classes = (IsAuthenticated,)
 
     def perform_create(self, serializer):
@@ -14,5 +14,5 @@ class AssetViewSet(ModelViewSet):
         serializer.save(user=self.request.user)
 
     def get_queryset(self):
-        """Users should only be able to see or edit their own assets."""
-        return Asset.objects.filter(user=self.request.user)
+        """Users should only be able to see or edit their own worth items."""
+        return Item.assets.filter(user=self.request.user)

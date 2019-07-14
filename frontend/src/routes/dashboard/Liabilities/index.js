@@ -11,7 +11,7 @@ import './style.scss';
 
 class LiabilitiesRoute extends React.Component {
   render() {
-    const liabilityData = this.props.liabilities.data;
+    const liabilityData = this.props.worthItems.data.filter(item => item.category === 'liability');
 
     const renderEmptyLiabilities = () => {
       if (liabilityData.length === 0)
@@ -51,5 +51,5 @@ class LiabilitiesRoute extends React.Component {
   }
 }
 
-const mapStateToProps = ({ liabilities }) => ({ liabilities });
+const mapStateToProps = ({ worthItems }) => ({ worthItems });
 export default connect(mapStateToProps, { showModal })(LiabilitiesRoute);

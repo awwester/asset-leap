@@ -9,19 +9,19 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 import ModalCancelButton from 'components/buttons/ModalCancelButton';
 import LoadButton from 'components/buttons/LoadButton';
-import createAsset from 'actions/assets/create';
-import updateAsset from 'actions/assets/update';
-import deleteAsset, { DELETE_ASSET_SUCCESS } from 'actions/assets/delete';
+import createworthItem from 'actions/worthItems/create';
+import updateworthItem from 'actions/worthItems/update';
+import deleteworthItem, { DELETE_WORTH_ITEM_SUCCESS } from 'actions/worthItems/delete';
 import { hideModal } from 'actions/general/modals';
 
-class AssetForm extends React.Component {
-  deleteAsset = async (assetId) => {
-    const action = await this.props.deleteAsset(assetId);
-    if (action.type === DELETE_ASSET_SUCCESS) {
-      toast('Asset deleted successfully');
+class worthItemForm extends React.Component {
+  deleteworthItem = async (worthItemId) => {
+    const action = await this.props.deleteworthItem(worthItemId);
+    if (action.type === DELETE_WORTH_ITEM_SUCCESS) {
+      toast('worthItem deleted successfully');
       this.props.hideModal();
     } else {
-      toast.danger('Error deleting asset.');
+      toast.danger('Error deleting worthItem.');
     }
   }
 
@@ -32,18 +32,18 @@ class AssetForm extends React.Component {
       isSubmitting,
       handleSubmit,
       status,
-      asset
+      worthItem
     } = this.props;
 
-    const renderDeleteAsset = () => {
-      if (!asset)
+    const renderDeleteworthItem = () => {
+      if (!worthItem)
         return null;
 
       return (
         <Button
           color="danger"
           className="float-left"
-          onClick={() => this.deleteAsset(this.props.asset.id)}
+          onClick={() => this.deleteworthItem(this.props.worthItem.id)}
         >
           <FontAwesomeIcon icon={faTrash} />
         </Button>
@@ -53,7 +53,7 @@ class AssetForm extends React.Component {
     return (
       <Form onSubmit={handleSubmit} className="p-4">
         <FormGroup>
-          <Label>Asset name</Label>
+          <Label>worthItem name</Label>
           <Input
             placeholder="citibank, house, etrade, etc"
             name="name"
@@ -65,7 +65,7 @@ class AssetForm extends React.Component {
         <Row form>
           <Col>
             <FormGroup>
-              <Label>Asset type</Label>
+              <Label>worthItem type</Label>
               <Input
                 type="select"
                 component="select"
@@ -99,7 +99,7 @@ class AssetForm extends React.Component {
           {status ? status.error : ''}
         </FormText>
 
-        {renderDeleteAsset()}
+        {renderDeleteworthItem()}
         <div className="button-container text-right">
           <ModalCancelButton />
           <LoadButton
@@ -109,7 +109,7 @@ class AssetForm extends React.Component {
             width={140}
             isLoading={isSubmitting}
           >
-            {asset ? 'Update' : 'Create'} Asset
+            {worthItem ? 'Update' : 'Create'} worthItem
           </LoadButton>
         </div>
       </Form>
@@ -119,11 +119,11 @@ class AssetForm extends React.Component {
 
 const FormikForm = withFormik({
   mapPropsToValues: props => {
-    if (props.asset) {
+    if (props.worthItem) {
       return {
-        name: props.asset.name,
-        type: props.asset.type,
-        value: props.asset.value
+        name: props.worthItem.name,
+        type: props.worthItem.type,
+        value: props.worthItem.value
       };
     }
 
@@ -141,22 +141,22 @@ const FormikForm = withFormik({
   }),
 
   handleSubmit: async (values, { props, setSubmitting, setStatus }) => {
-    // Either create a new asset or update an existing one.
+    // Either create a new worthItem or update an existing one.
     let actionCreator;
-    if (props.asset)
-      actionCreator = () => props.updateAsset(props.asset.id, values)
+    if (props.worthItem)
+      actionCreator = () => props.updateworthItem(props.worthItem.id, values)
     else
-      actionCreator = () => props.createAsset(values);
+      actionCreator = () => props.createworthItem(values);
 
     const action = await actionCreator();
     setSubmitting(false);
 
-    if (action.type.includes("_ASSET_FAILURE"))
+    if (action.type.includes("_WORTH_ITEM_FAILURE"))
       return setStatus({ error: action.error});
 
-    toast(props.asset ? `${values.name} updated` : `${values.name} created`);
+    toast(props.worthItem ? `${values.name} updated` : `${values.name} created`);
     return props.hideModal();
   },
-})(AssetForm);
+})(worthItemForm);
 
-export default connect(null, { createAsset, updateAsset, deleteAsset, hideModal })(FormikForm);
+export default connect(null, { createworthItem, updateworthItem, deleteworthItem, hideModal })(FormikForm);
