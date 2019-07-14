@@ -52,6 +52,39 @@ class worthItemForm extends React.Component {
       );
     }
 
+    const renderSelectControl = () => {
+      if (category === "asset") {
+        return (
+          <Input
+            type="select"
+            component="select"
+            placeholder="type"
+            name="type"
+            tag={Field}
+            invalid={errors.type && touched.type}
+          >
+            <option value="current_asset">Current Asset</option>
+            <option value="fixed_asset">Fixed Asset</option>
+            <option value="financial_asset">Financial Asset</option>
+          </Input>
+        );
+      }
+
+      return (
+        <Input
+          type="select"
+          component="select"
+          placeholder="type"
+          name="type"
+          tag={Field}
+          invalid={errors.type && touched.type}
+        >
+          <option value="current_liab">Current Liability</option>
+          <option value="noncurrent_liab">Noncurrent Liability</option>
+        </Input>
+      );
+    }
+
     return (
       <Form onSubmit={handleSubmit} className="p-4">
         <FormGroup>
@@ -68,21 +101,7 @@ class worthItemForm extends React.Component {
           <Col>
             <FormGroup>
               <Label>{capitalize(category)} type</Label>
-              <Input
-                type="select"
-                component="select"
-                placeholder="type"
-                name="type"
-                tag={Field}
-                invalid={errors.type && touched.type}
-              >
-                <option value="current_asset">Current Asset</option>
-                <option value="fixed_asset">Fixed Asset</option>
-                <option value="financial_asset">Financial Asset</option>
-                <option value="current_liab">Current Liability</option>
-                <option value="noncurrent_liab">Noncurrent Liability</option>
-              </Input>
-
+              {renderSelectControl()}
               <FormFeedback>{errors.type}</FormFeedback>
             </FormGroup>
           </Col>
