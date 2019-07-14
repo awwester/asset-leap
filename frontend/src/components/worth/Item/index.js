@@ -17,7 +17,7 @@ class ItemRow extends React.Component {
     return (
       <Row className="item-row mb-0 p-3">
         <Col sm={6}>
-          <strong className="mr-4">{worthItem.name}</strong>
+          <p className="mr-4">{worthItem.name}</p>
         </Col>
         <Col sm={4}>{currency(worthItem.value)}</Col>
         <Col sm={2}>
