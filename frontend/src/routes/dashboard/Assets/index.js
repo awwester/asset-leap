@@ -7,16 +7,13 @@ import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import { showModal } from 'actions/general/modals';
 import DashboardHeader from 'components/dashboard/Header';
 import DashboardContainer from 'components/dashboard/Container';
-import AssetRow from 'components/assets/Row';
+import WorthTypeContainer from 'components/worth/TypeContainer';
+import WorthTotalContainer from 'components/worth/TotalContainer';
 import './style.scss';
 
 class AssetsRoute extends React.Component {
   render() {
     const assetData = this.props.assets.data;
-
-    const totalAssetsSum = assetData
-      .map(asset => asset.value)
-      .reduce((prev, curr) => prev + curr, 0);
 
     const renderEmptyAssets = () => {
       if (assetData.length === 0)
@@ -32,32 +29,11 @@ class AssetsRoute extends React.Component {
       const assets = assetData.filter(asset => asset.type === assetType);
       if (assets.length === 0) return null;
 
-      const sum = assets.map(asset => asset.value).reduce((prev, curr) => prev + curr, 0);
-
       return (
         <Col md={6} sm={12}>
-          <DashboardContainer className={`asset-type-container ${assetType}-assets`}>
-            <h4 className="asset-type-name">{assetType} Assets</h4>
-            {assets.map((asset) => <AssetRow key={asset.id} asset={asset} />)}
-            <Row className="asset-type-footer pt-3 px-3">
-              <Col><strong>Total</strong></Col>
-              <Col><strong>${sum}</strong></Col>
-              <Col />
-            </Row>
-          </DashboardContainer>
+          <WorthTypeContainer items={assets} category="assets" type={assetType} />
         </Col>
       );
-    }
-
-    const renderTotalAssets = () => {
-      if (assetData.length > 0)
-        return (
-          <Row className="text-center my-5">
-            <Col>
-              <h2>Total assets <strong>${totalAssetsSum}</strong></h2>
-            </Col>
-          </Row>
-        );
     }
 
     return (
@@ -72,7 +48,7 @@ class AssetsRoute extends React.Component {
           </Button>
         </DashboardHeader>
         {renderEmptyAssets()}
-        {renderTotalAssets()}
+        <WorthTotalContainer items={assetData} category="assets" />
         <Row>
           {renderAssets('current')}
           {renderAssets('fixed')}

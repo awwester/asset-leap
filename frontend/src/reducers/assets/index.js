@@ -1,7 +1,7 @@
 import { FETCH_ASSETS_START,FETCH_ASSETS_SUCCESS, FETCH_ASSETS_FAILURE } from 'actions/assets/fetch';
 import { CREATE_ASSET_START, CREATE_ASSET_SUCCESS, CREATE_ASSET_FAILURE } from 'actions/assets/create';
 import { UPDATE_ASSET_START, UPDATE_ASSET_SUCCESS, UPDATE_ASSET_FAILURE } from 'actions/assets/update';
-import { DELETE_ASSET_START, DELETE_ASSET_SUCCESS, DELETE_ASSET_FAILURE } from 'actions/assets/delete';
+import { DELETE_ASSET_START } from 'actions/assets/delete';
 
 const initialState = {
   data: [],

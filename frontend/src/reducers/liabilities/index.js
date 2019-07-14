@@ -1,7 +1,7 @@
 import { FETCH_LIABILITIES_START,FETCH_LIABILITIES_SUCCESS, FETCH_LIABILITIES_FAILURE } from 'actions/assets/fetch';
 import { CREATE_LIABILITY_START, CREATE_LIABILITY_SUCCESS, CREATE_LIABILITY_FAILURE } from 'actions/assets/create';
 import { UPDATE_LIABILITY_START, UPDATE_LIABILITY_SUCCESS, UPDATE_LIABILITY_FAILURE } from 'actions/assets/update';
-import { DELETE_LIABILITY_START, DELETE_LIABILITY_SUCCESS, DELETE_LIABILITY_FAILURE } from 'actions/assets/delete';
+import { DELETE_LIABILITY_START } from 'actions/assets/delete';
 
 const initialState = {
   data: [],

@@ -9,21 +9,22 @@ import { showModal } from 'actions/general/modals';
 
 import './style.scss';
 
-class AssetRow extends React.Component {
+class ItemRow extends React.Component {
+  // Render the values and functionality for a given item or liability.
   render() {
-    const { asset } = this.props;
+    const { item } = this.props;
     return (
-      <Row className="asset-row mb-0 p-3">
+      <Row className="item-row mb-0 p-3">
         <Col>
-          <strong className="mr-4">{asset.name}</strong>
+          <strong className="mr-4">{item.name}</strong>
         </Col>
-        <Col>${asset.value}</Col>
+        <Col>${item.value}</Col>
         <Col>
           <div className="float-right">
             <FontAwesomeIcon
               icon={faPencilAlt}
-              className="edit-asset-icon"
-              onClick={() => this.props.showModal('asset', { asset })}
+              className="edit-item-icon"
+              onClick={() => this.props.showModal('item', { item })}
             />
           </div>
         </Col>
@@ -32,8 +33,8 @@ class AssetRow extends React.Component {
   }
 }
 
-AssetRow.propTypes = {
-  asset: PropTypes.object.isRequired
+ItemRow.propTypes = {
+  item: PropTypes.object.isRequired
 }
 
-export default connect(null, { showModal })(AssetRow);
+export default connect(null, { showModal })(ItemRow);
