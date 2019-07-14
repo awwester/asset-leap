@@ -7,4 +7,4 @@ if you wish in that file.
 from .base import *
 
 
-JSON_RESPONSE_DELAY = 1
+JSON_RESPONSE_DELAY = 300  # time in ms
