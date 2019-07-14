@@ -33,10 +33,11 @@ export default ({ worthItems, type }) => {
       break;
   }
 
+  const category = worthItems[0].type.includes('asset') ? 'asset' : 'liability';
   return (
     <div className="worth-type-container">
       <DashboardContainer>
-        <h4 className="worth-type-name mb-0">{itemTitle}</h4>
+        <h4 className={`worth-type-name ${category}-container mb-0`}>{itemTitle}</h4>
         {worthItems.map((worthItem) => <WorthItem key={worthItem.id} worthItem={worthItem} />)}
         <Row className="worth-type-footer pt-3 px-3">
           <Col sm={6}><strong>Total</strong></Col>

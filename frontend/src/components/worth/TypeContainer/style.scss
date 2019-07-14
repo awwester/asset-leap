@@ -6,13 +6,21 @@
 
   .worth-type-name {
     text-transform: capitalize;
-    background-color: $secondary;
     color: white;
     margin: -15px;
     margin-bottom: 20px;
     padding: 15px;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
+  }
+
+  .asset-container {
+    background-color: $primary;
+    border-bottom: 3px solid darken($primary, 5);
+  }
+
+  .liability-container {
+    background-color: $secondary;
     border-bottom: 3px solid darken($secondary, 5);
   }
 
