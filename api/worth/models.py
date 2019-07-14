@@ -37,6 +37,13 @@ class Item(models.Model):
         )
 
     user = models.ForeignKey('accounts.User', on_delete=models.CASCADE)
+    statement = models.ForeignKey(
+        'statements.Statement',
+        on_delete=models.CASCADE,
+        related_name='worth_items',
+        null=True,
+        blank=True
+    )
     name = models.CharField(max_length=64)
     value = models.PositiveIntegerField(default=0)
     type = models.CharField(max_length=16, choices=Type.CHOICES)

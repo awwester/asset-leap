@@ -10,7 +10,7 @@ class ItemViewSet(ModelViewSet):
     permission_classes = (IsAuthenticated,)
 
     def perform_create(self, serializer):
-        """Save the user to the asset object."""
+        """Save the user to the worth item object."""
         serializer.save(user=self.request.user)
 
     def get_queryset(self):

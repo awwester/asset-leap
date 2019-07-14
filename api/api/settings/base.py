@@ -54,8 +54,9 @@ INSTALLED_APPS = [
 
     # project apps
     'accounts',
-    'worth',
     'core',
+    'statements',
+    'worth',
 ]
 
 SITE_ID = 1
