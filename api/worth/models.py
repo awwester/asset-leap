@@ -26,7 +26,7 @@ class Item(models.Model):
         FIXED_ASSET = 'fixed_asset'
         CURRENT_ASSET = 'current_asset'
         CURRENT_LIAB = 'current_liab'
-        NONCURRENT_LIAB = 'current_liab'
+        NONCURRENT_LIAB = 'noncurrent_liab'
 
         CHOICES = (
             (FINANCIAL_ASSET, 'Financial asset'),
@@ -49,7 +49,7 @@ class Item(models.Model):
     @property
     def category(self):
         """Determine if asset or liability based on type."""
-        return 'asset' if 'asset' in self.type else 'liab'
+        return 'asset' if 'asset' in self.type else 'liability'
 
     def __str__(self):
         return f"{self.user.username} - {self.name}"

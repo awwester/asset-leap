@@ -15,4 +15,4 @@ class ItemViewSet(ModelViewSet):
 
     def get_queryset(self):
         """Users should only be able to see or edit their own worth items."""
-        return Item.assets.filter(user=self.request.user)
+        return Item.objects.filter(user=self.request.user)

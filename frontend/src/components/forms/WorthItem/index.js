@@ -13,6 +13,7 @@ import createworthItem from 'actions/worthItems/create';
 import updateworthItem from 'actions/worthItems/update';
 import deleteworthItem, { DELETE_WORTH_ITEM_SUCCESS } from 'actions/worthItems/delete';
 import { hideModal } from 'actions/general/modals';
+import { capitalize } from 'utils/capitalize';
 
 class worthItemForm extends React.Component {
   deleteworthItem = async (worthItemId) => {
@@ -35,6 +36,7 @@ class worthItemForm extends React.Component {
       worthItem
     } = this.props;
 
+    const category = this.props.category || worthItem.category;
     const renderDeleteworthItem = () => {
       if (!worthItem)
         return null;
@@ -53,7 +55,7 @@ class worthItemForm extends React.Component {
     return (
       <Form onSubmit={handleSubmit} className="p-4">
         <FormGroup>
-          <Label>worthItem name</Label>
+          <Label>{capitalize(category)} name</Label>
           <Input
             placeholder="citibank, house, etrade, etc"
             name="name"
@@ -65,7 +67,7 @@ class worthItemForm extends React.Component {
         <Row form>
           <Col>
             <FormGroup>
-              <Label>worthItem type</Label>
+              <Label>{capitalize(category)} type</Label>
               <Input
                 type="select"
                 component="select"
@@ -74,9 +76,11 @@ class worthItemForm extends React.Component {
                 tag={Field}
                 invalid={errors.type && touched.type}
               >
-                <option value="current">Current</option>
-                <option value="fixed">Fixed</option>
-                <option value="finance">Financial</option>
+                <option value="current_asset">Current Asset</option>
+                <option value="fixed_asset">Fixed Asset</option>
+                <option value="financial_asset">Financial Asset</option>
+                <option value="current_liab">Current Liability</option>
+                <option value="noncurrent_liab">Noncurrent Liability</option>
               </Input>
 
               <FormFeedback>{errors.type}</FormFeedback>
@@ -109,7 +113,7 @@ class worthItemForm extends React.Component {
             width={140}
             isLoading={isSubmitting}
           >
-            {worthItem ? 'Update' : 'Create'} worthItem
+            {worthItem ? 'Update' : 'Create'} {category}
           </LoadButton>
         </div>
       </Form>
@@ -129,7 +133,7 @@ const FormikForm = withFormik({
 
     return {
       name: '',
-      type: 'current',
+      type: 'current_asset',
       value: ''
     }
   },
@@ -159,4 +163,6 @@ const FormikForm = withFormik({
   },
 })(worthItemForm);
 
-export default connect(null, { createworthItem, updateworthItem, deleteworthItem, hideModal })(FormikForm);
+export default connect(null, {
+  createworthItem, updateworthItem, deleteworthItem, hideModal
+})(FormikForm);

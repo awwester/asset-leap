@@ -12,20 +12,19 @@ import './style.scss';
 class ItemRow extends React.Component {
   // Render the values and functionality for a given item or liability.
   render() {
-    const { item, category } = this.props;
-    const modalName = category === 'assets' ? 'asset' : 'liability';
+    const { worthItem } = this.props;
     return (
       <Row className="item-row mb-0 p-3">
         <Col sm={6}>
-          <strong className="mr-4">{item.name}</strong>
+          <strong className="mr-4">{worthItem.name}</strong>
         </Col>
-        <Col sm={4}>${item.value}</Col>
+        <Col sm={4}>${worthItem.value}</Col>
         <Col sm={2}>
           <div className="float-right">
             <FontAwesomeIcon
               icon={faPencilAlt}
               className="edit-item-icon"
-              onClick={() => this.props.showModal(modalName, { item })}
+              onClick={() => this.props.showModal('worthItem', { worthItem })}
             />
           </div>
         </Col>
@@ -35,7 +34,7 @@ class ItemRow extends React.Component {
 }
 
 ItemRow.propTypes = {
-  item: PropTypes.object.isRequired
+  worthItem: PropTypes.object.isRequired
 }
 
 export default connect(null, { showModal })(ItemRow);

@@ -11,8 +11,7 @@ import './style.scss';
 
 class AssetsRoute extends React.Component {
   render() {
-    const assetData = this.props.worthItems.data.filter(item => item.category === 'asset');
-
+    const assetData = this.props.worthItems.data.filter(item => item.category === "asset");
     const renderEmptyAssets = () => {
       if (assetData.length === 0)
         return <EmptyItemsContainer category="liabilities" />;
@@ -24,7 +23,7 @@ class AssetsRoute extends React.Component {
 
       return (
         <Col md={6} sm={12}>
-          <WorthTypeContainer items={assets} category="assets" type={assetType} />
+          <WorthTypeContainer worthItems={assets} category="assets" type={assetType} />
         </Col>
       );
     }
@@ -35,17 +34,17 @@ class AssetsRoute extends React.Component {
           <Button
             color="primary"
             outline
-            onClick={() => this.props.showModal("asset")}
+            onClick={() => this.props.showModal("worthItem", { category: "asset" })}
           >
             Create Asset
           </Button>
         </DashboardHeader>
         {renderEmptyAssets()}
-        <WorthTotalContainer items={assetData} category="assets" />
+        <WorthTotalContainer worthItems={assetData} category="assets" />
         <Row>
-          {renderAssets('current')}
-          {renderAssets('fixed')}
-          {renderAssets('finance')}
+          {renderAssets('current_asset')}
+          {renderAssets('fixed_asset')}
+          {renderAssets('financial_asset')}
         </Row>
       </Container>
     );

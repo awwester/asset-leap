@@ -5,11 +5,11 @@ import WorthItemForm from 'components/forms/WorthItem';
 
 class AssetModal extends React.Component {
   render() {
-    const { item, ...rest } = this.props;
+    const { worthItem, category, ...rest } = this.props;
     return (
       <Modal { ...rest } className="asset-modal">
         <ModalBody>
-          <WorthItemForm asset={item} />
+          <WorthItemForm worthItem={worthItem} category={category} />
         </ModalBody>
       </Modal>
     );

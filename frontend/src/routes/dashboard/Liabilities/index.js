@@ -12,10 +12,10 @@ import './style.scss';
 class LiabilitiesRoute extends React.Component {
   render() {
     const liabilityData = this.props.worthItems.data.filter(item => item.category === 'liability');
-
+    console.log(liabilityData)
     const renderEmptyLiabilities = () => {
       if (liabilityData.length === 0)
-        return <EmptyItemsContainer />
+        return <EmptyItemsContainer />;
     }
 
     const renderLiabilities = (liabilityType) => {
@@ -24,7 +24,11 @@ class LiabilitiesRoute extends React.Component {
 
       return (
         <Col md={6} sm={12}>
-          <WorthTypeContainer items={liabilities} category="liabilities" type={liabilityType} />
+          <WorthTypeContainer
+            worthItems={liabilities}
+            category="liabilities"
+            type={liabilityType}
+          />
         </Col>
       );
     }
@@ -35,16 +39,19 @@ class LiabilitiesRoute extends React.Component {
           <Button
             color="primary"
             outline
-            onClick={() => this.props.showModal("liability")}
+            onClick={() => this.props.showModal("worthItem", { category: "liability" })}
           >
             Create Liability
           </Button>
         </DashboardHeader>
         {renderEmptyLiabilities()}
-        <WorthTotalContainer items={liabilityData} category="liabilities" />
+        <WorthTotalContainer
+          worthItems={liabilityData}
+          category="liabilities"
+        />
         <Row>
-          {renderLiabilities('current')}
-          {renderLiabilities('non-current')}
+          {renderLiabilities('current_liab')}
+          {renderLiabilities('noncurrent_liab')}
         </Row>
       </Container>
     );

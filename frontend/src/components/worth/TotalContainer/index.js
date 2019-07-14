@@ -3,13 +3,13 @@ import { Row, Col } from 'reactstrap';
 
 import './style.scss'
 
-export default ({ items, category }) => {
+export default ({ worthItems, category }) => {
   // Title section that appears for assets and liabilties summing up all the items.
-  if (items.length === 0)
+  if (worthItems.length === 0)
     return null;
 
-  const worthTotal = items
-    .map(item => item.value)
+  const worthTotal = worthItems
+    .map(worthItem => worthItem.value)
     .reduce((prev, curr) => prev + curr, 0);
 
   return (
