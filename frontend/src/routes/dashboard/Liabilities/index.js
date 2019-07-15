@@ -34,7 +34,7 @@ class LiabilitiesRoute extends React.Component {
 
     return (
       <Container className="liabilities-route p-4">
-        <DashboardHeader>
+        <DashboardHeader className="text-right">
           <Button
             color="primary"
             outline

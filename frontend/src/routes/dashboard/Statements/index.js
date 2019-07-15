@@ -68,7 +68,7 @@ class StatementsRoute extends React.Component {
             <Col>{renderAssetGroups()}</Col>
             <Col>{renderLiabilityGroups()}</Col>
           </Row>
-          <div className="button-container text-right mt-4">
+          <div className="button-container text-center mt-4">
             <Button
               className="mr-4"
               color="link"

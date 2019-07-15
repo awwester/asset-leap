@@ -30,7 +30,7 @@ class AssetsRoute extends React.Component {
 
     return (
       <Container className="assets-route p-4">
-        <DashboardHeader>
+        <DashboardHeader className="text-right">
           <Button
             color="primary"
             outline
