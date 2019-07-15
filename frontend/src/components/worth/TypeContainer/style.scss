@@ -17,11 +17,13 @@
   .asset-container {
     background-color: $primary;
     border-bottom: 3px solid darken($primary, 5);
+    border-left: 3px solid darken($primary, 5);
   }
 
   .liability-container {
     background-color: $secondary;
     border-bottom: 3px solid darken($secondary, 5);
+    border-left: 3px solid darken($secondary, 5);
   }
 
   .worth-type-footer {
