@@ -6,6 +6,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import moment from 'moment';
 
+import createStatement, { CREATE_STATEMENTS_SUCCESS } from 'actions/statements/create';
+import StatementItem from 'components/statements/Item';
 import LoadButton from 'components/buttons/LoadButton';
 import WorthTypeContainer from 'components/worth/TypeContainer'
 import DashboardHeader from 'components/dashboard/Header';
@@ -18,14 +20,19 @@ class StatementsRoute extends React.Component {
     statementDate: moment().startOf('month').format('YYYY-MM-DD')
   };
 
-  createStatement = () => {
-    this.setState({ createMode: false });
-    toast('Statement created');
+  createStatement = async () => {
+    const action = this.props.createStatement({ date: this.state.statementDate });
+    if (action.type === CREATE_STATEMENTS_SUCCESS) {
+      this.setState({ createMode: false });
+      return toast('Statement created');
+    }
+
+    return toast('Error creating statement');
   }
 
   render() {
-    const dateIsValid = moment(this.state.statementDate, 'YYYY-MM-DD', true).isValid();
-    const formattedDate = moment(this.state.statementDate, "YYYY-MM-DD", true).format('LL')
+    const dateIsValid = moment(this.state.statementDate, "YYYY-MM-DD", true).isValid();
+    const formattedDate = moment(this.state.statementDate, "YYYY-MM-DD", true).format("LL")
 
     const renderCreateStatement = () => {
       // Return section for the user to create a new statement.
@@ -80,7 +87,7 @@ class StatementsRoute extends React.Component {
               color="primary"
               onClick={this.createStatement}
               width={350}
-              isLoading={false}
+              isLoading={this.props.statements.isLoading}
               disabled={!dateIsValid}
             >
               { dateIsValid ?
@@ -102,7 +109,11 @@ class StatementsRoute extends React.Component {
           </DashboardContainer>
         );
 
-      return <div>Hello</div>;
+      return (
+        <DashboardContainer>
+         {this.props.statements.data.map(statement => <StatementItem statement={statement}/>)}
+        </DashboardContainer>
+      )
     }
 
     const renderStatementsContent = () => {
@@ -137,4 +148,4 @@ const mapStateToProps = ({ statements, worthItems }) => ({
   assets: worthItems.data.filter(item => item.category === 'asset'),
   liabilities: worthItems.data.filter(item => item.category === 'liability'),
 });
-export default connect(mapStateToProps)(StatementsRoute);
+export default connect(mapStateToProps, { createStatement })(StatementsRoute);

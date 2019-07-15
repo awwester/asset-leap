@@ -1,12 +1,12 @@
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated
 
-from .serializers import ItemSerializer
+from .serializers import WorthItemSerializer
 from .models import Item
 
 
 class ItemViewSet(ModelViewSet):
-    serializer_class = ItemSerializer
+    serializer_class = WorthItemSerializer
     permission_classes = (IsAuthenticated,)
 
     def perform_create(self, serializer):
