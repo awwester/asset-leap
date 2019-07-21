@@ -7,7 +7,6 @@ import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import moment from 'moment';
 
 import createStatement, { CREATE_STATEMENTS_SUCCESS } from 'actions/statements/create';
-import DetailStatement from 'components/statements/DetailContainer';
 import StatementItem from 'components/statements/Item';
 import LoadButton from 'components/buttons/LoadButton';
 import WorthTypeContainer from 'components/worth/TypeContainer'
@@ -20,8 +19,7 @@ import './style.scss';
 class StatementsRoute extends React.Component {
   state = {
     createMode: false,
-    statementDate: moment().startOf('month').format('YYYY-MM-DD'),
-    detailStatement: null,
+    statementDate: moment().startOf('month').format('YYYY-MM-DD')
   };
 
   createStatement = async () => {
@@ -32,11 +30,6 @@ class StatementsRoute extends React.Component {
     }
 
     return toast('Error creating statement');
-  }
-
-  setDetailStatement = (detailStatement) => {
-    // View more details about a single statement
-    this.setState({ detailStatement });
   }
 
   render() {
@@ -129,7 +122,7 @@ class StatementsRoute extends React.Component {
            return <StatementItem
             key={statement.id}
             statement={statement}
-            onClick={() => this.setDetailStatement(statement)}
+            onClick={() => this.props.history.push(`/dashboard/statements/${statement.id}`)}
           />
          })}
         </DashboardContainer>
@@ -137,15 +130,6 @@ class StatementsRoute extends React.Component {
     }
 
     const renderStatementsContent = () => {
-      if (this.state.detailStatement)
-        return (
-          <DetailStatement
-            statement={this.state.detailStatement}
-            assets={this.props.assets}
-            liabilities={this.props.liabilities}
-          />
-        );
-
       return this.state.createMode ? renderCreateStatement() : renderStatements();
     };
 

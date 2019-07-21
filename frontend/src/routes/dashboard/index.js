@@ -5,15 +5,21 @@ import { NavLink, Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFrog, faDollarSign, faHouseDamage, faLock, faChartLine } from '@fortawesome/free-solid-svg-icons';
 
+import Loading from 'components/Loading';
 import fetchWorthItems from 'actions/worthItems/fetch';
 import fetchStatements from 'actions/statements/fetch';
 import logoutUser from 'actions/auth/logout';
 import StatementsRoute from './Statements';
+import StatementDetailRoute from './StatementDetail';
 import AssetsRoute from './Assets';
 import LiabilitiesRoute from './Liabilities';
 import './style.scss';
 
 class DashboardRouter extends React.Component {
+  state = {
+    isReady: false
+  }
+
   componentDidMount() {
     // Require authentication for the dashboard.
     const { history } = this.props;
@@ -23,9 +29,12 @@ class DashboardRouter extends React.Component {
     this.loadInitialData();
   }
 
-  loadInitialData = () => {
-    this.props.fetchWorthItems();
-    this.props.fetchStatements();
+  loadInitialData = async () => {
+    await Promise.all([
+      this.props.fetchWorthItems(),
+      this.props.fetchStatements()
+    ]);
+    this.setState({ isReady: true });
   }
 
   logout = () => {
@@ -34,6 +43,9 @@ class DashboardRouter extends React.Component {
   }
 
   render() {
+    if (!this.state.isReady)
+      return <Loading />;
+
     return (
       <div className="dashboard-route">
         <section className="sidenav-section">
@@ -60,6 +72,7 @@ class DashboardRouter extends React.Component {
 
         <section className="sidenav-layout-content">
           <Switch>
+            <Route exact path="/dashboard/statements/:id" component={StatementDetailRoute} />
             <Route exact path="/dashboard/statements" component={StatementsRoute} />
             <Route exact path="/dashboard/assets" component={AssetsRoute} />
             <Route exact path="/dashboard/liabilities" component={LiabilitiesRoute} />
