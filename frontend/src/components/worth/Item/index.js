@@ -15,7 +15,7 @@ class ItemRow extends React.Component {
   render() {
     const { worthItem } = this.props;
     return (
-      <Row className="wprth-item-row mb-0 p-3">
+      <Row className="worth-item-row mb-0 p-3">
         <Col sm={6}>
           <span>{worthItem.name}</span>
         </Col>

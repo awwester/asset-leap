@@ -7,17 +7,21 @@ import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import moment from 'moment';
 
 import createStatement, { CREATE_STATEMENTS_SUCCESS } from 'actions/statements/create';
+import DetailStatement from 'components/statements/DetailContainer';
 import StatementItem from 'components/statements/Item';
 import LoadButton from 'components/buttons/LoadButton';
 import WorthTypeContainer from 'components/worth/TypeContainer'
 import DashboardHeader from 'components/dashboard/Header';
 import DashboardContainer from 'components/dashboard/Container';
+import Loading from 'components/Loading';
+import { getUniqueTypes } from 'utils/worthItems';
 import './style.scss';
 
 class StatementsRoute extends React.Component {
   state = {
     createMode: false,
-    statementDate: moment().startOf('month').format('YYYY-MM-DD')
+    statementDate: moment().startOf('month').format('YYYY-MM-DD'),
+    detailStatement: null,
   };
 
   createStatement = async () => {
@@ -30,31 +34,41 @@ class StatementsRoute extends React.Component {
     return toast('Error creating statement');
   }
 
+  setDetailStatement = (detailStatement) => {
+    // View more details about a single statement
+    this.setState({ detailStatement });
+  }
+
   render() {
+    if (this.props.statements.isLoading)
+      return <Loading />;
+
     const dateIsValid = moment(this.state.statementDate, "YYYY-MM-DD", true).isValid();
     const formattedDate = moment(this.state.statementDate, "YYYY-MM-DD", true).format("LL")
 
     const renderCreateStatement = () => {
       // Return section for the user to create a new statement.
       const renderAssetGroups = () => {
-        const uniqueAssetTypes = [...new Set(this.props.assets.map(obj => obj.type)) ];
-        return uniqueAssetTypes.map(assetType => {
-          return <WorthTypeContainer
-            key={assetType}
-            worthItems={this.props.assets.filter(asset => asset.type === assetType)}
-            type={assetType}
-          />
+        return getUniqueTypes(this.props.assets).map(assetType => {
+          return (
+            <WorthTypeContainer
+              key={assetType}
+              worthItems={this.props.assets.filter(asset => asset.type === assetType)}
+              type={assetType}
+            />
+          );
         });
       };
 
       const renderLiabilityGroups = () => {
-        const uniqueLiabilityTypes = [...new Set(this.props.liabilities.map(obj => obj.type)) ];
-        return uniqueLiabilityTypes.map(liabilityType => {
-          return <WorthTypeContainer
-            key={liabilityType}
-            worthItems={this.props.liabilities.filter(liab => liab.type === liabilityType)}
-            type={liabilityType}
-          />
+        return getUniqueTypes(this.props.liabilities).map(liabilityType => {
+          return (
+            <WorthTypeContainer
+              key={liabilityType}
+              worthItems={this.props.liabilities.filter(liab => liab.type === liabilityType)}
+              type={liabilityType}
+            />
+          );
         });
       };
 
@@ -111,17 +125,41 @@ class StatementsRoute extends React.Component {
 
       return (
         <DashboardContainer>
-         {this.props.statements.data.map(statement => <StatementItem statement={statement}/>)}
+         {this.props.statements.data.map(statement => {
+           return <StatementItem
+            key={statement.id}
+            statement={statement}
+            onClick={() => this.setDetailStatement(statement)}
+          />
+         })}
         </DashboardContainer>
       )
     }
 
     const renderStatementsContent = () => {
+      if (this.state.detailStatement)
+        return (
+          <DetailStatement
+            statement={this.state.detailStatement}
+            assets={this.props.assets}
+            liabilities={this.props.liabilities}
+          />
+        );
+
       return this.state.createMode ? renderCreateStatement() : renderStatements();
     };
 
     const renderStatementsHeader = () => {
       if (this.state.createMode) return null;
+
+      if (this.state.detailStatement)
+        return (
+          <DashboardHeader>
+            <Button color="link" onClick={() => this.setState({ detailStatement: null })}>
+              Cancel
+            </Button>
+          </DashboardHeader>
+        );
 
       return (
         <DashboardHeader className="text-right">
