@@ -15,12 +15,10 @@ class StatementDetailRoute extends React.Component {
       return statement.id.toString() === this.props.match.params.id
     });
 
-    console.log('detail...', detail)
-
     return (
       <div className="statement-detail-route">
         <Container className="p-4">
-          <StatementDetail statement={detail} />
+          <StatementDetail disableEdit statement={detail} />
         </Container>
       </div>
     );

@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import WorthItemModal from '../WorthItem';
+import DeleteStatementModal from '../DeleteStatement';
 import { hideModal } from 'actions/general/modals';
 
 class ModalContainer extends React.Component {
@@ -9,6 +10,7 @@ class ModalContainer extends React.Component {
 
   modalComponents = {
     worthItem: WorthItemModal,
+    deleteStatement: DeleteStatementModal,
   }
 
   render() {

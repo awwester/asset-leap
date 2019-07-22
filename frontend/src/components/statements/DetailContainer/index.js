@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Row, Col, Button } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -8,11 +9,17 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 import WorthTypeContainer from 'components/worth/TypeContainer';
 import DashboardHeader from 'components/dashboard/Header';
+import { showModal } from 'actions/general/modals';
 import { getUniqueTypes } from 'utils/worthItems';
 
 class DetailStatementContainer extends React.Component {
-  render() {
+  deleteStatement = () => {
     const { statement } = this.props;
+    this.props.showModal('deleteStatement', { statement });
+  }
+
+  render() {
+    const { statement, disableEdit } = this.props;
     const { assets, liabilities } = statement;
 
     const renderAssetGroups = () => {
@@ -20,6 +27,7 @@ class DetailStatementContainer extends React.Component {
         return (
           <WorthTypeContainer
             key={assetType}
+            disableEdit={disableEdit}
             worthItems={assets.filter(asset => asset.type === assetType)}
             type={assetType}
           />
@@ -32,6 +40,7 @@ class DetailStatementContainer extends React.Component {
         return (
           <WorthTypeContainer
             key={liabilityType}
+            disableEdit={disableEdit}
             worthItems={liabilities.filter(liab => liab.type === liabilityType)}
             type={liabilityType}
           />
@@ -46,6 +55,14 @@ class DetailStatementContainer extends React.Component {
             <DashboardHeader>
               <Button color="link" onClick={() => this.props.history.push("/dashboard/statements")}>
                 <FontAwesomeIcon icon={faArrowLeft} /> All Statements
+              </Button>
+              <Button
+                outline
+                color="secondary"
+                onClick={this.deleteStatement}
+                className="float-right"
+              >
+                Delete
               </Button>
             </DashboardHeader>
           </Col>
@@ -66,7 +83,9 @@ class DetailStatementContainer extends React.Component {
 }
 
 DetailStatementContainer.propTypes = {
-  statement: PropTypes.object.isRequired
+  statement: PropTypes.object.isRequired,
+  disableEdit: PropTypes.bool
 }
 
-export default withRouter(DetailStatementContainer);
+const ConnectedComponent = connect(null, { showModal })(DetailStatementContainer);
+export default withRouter(ConnectedComponent);

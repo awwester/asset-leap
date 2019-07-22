@@ -14,13 +14,11 @@ class ItemRow extends React.Component {
   // Render the values and functionality for a given item or liability.
   render() {
     const { worthItem } = this.props;
-    return (
-      <Row className="worth-item-row mb-0 p-3">
-        <Col sm={6}>
-          <span>{worthItem.name}</span>
-        </Col>
-        <Col sm={4}>{currency(worthItem.value)}</Col>
-        <Col sm={2}>
+
+    const renderEditIcon = () => {
+      // Sometimes we'll want to hide the edit icon.
+      if (!this.props.disableEdit)
+        return (
           <div className="float-right">
             <FontAwesomeIcon
               icon={faPencilAlt}
@@ -28,6 +26,17 @@ class ItemRow extends React.Component {
               onClick={() => this.props.showModal('worthItem', { worthItem })}
             />
           </div>
+        );
+    }
+
+    return (
+      <Row className="worth-item-row mb-0 p-3">
+        <Col sm={6}>
+          <span>{worthItem.name}</span>
+        </Col>
+        <Col sm={4}>{currency(worthItem.value)}</Col>
+        <Col sm={2}>
+          {renderEditIcon()}
         </Col>
       </Row>
     );
@@ -35,7 +44,8 @@ class ItemRow extends React.Component {
 }
 
 ItemRow.propTypes = {
-  worthItem: PropTypes.object.isRequired
+  worthItem: PropTypes.object.isRequired,
+  disableEdit: PropTypes.bool
 }
 
 export default connect(null, { showModal })(ItemRow);
