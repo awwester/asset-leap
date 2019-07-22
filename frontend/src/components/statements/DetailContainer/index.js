@@ -11,6 +11,7 @@ import WorthTypeContainer from 'components/worth/TypeContainer';
 import DashboardHeader from 'components/dashboard/Header';
 import { showModal } from 'actions/general/modals';
 import { getUniqueTypes } from 'utils/worthItems';
+import formatCurrency from 'utils/currency';
 
 class DetailStatementContainer extends React.Component {
   deleteStatement = () => {
@@ -70,7 +71,7 @@ class DetailStatementContainer extends React.Component {
 
         <h4>
           {moment(statement.date).format("LL")}
-          <span className="float-right">Total worth $100,000</span>
+          <span className="float-right">Total worth {formatCurrency(statement.total)}</span>
         </h4>
 
         <Row>

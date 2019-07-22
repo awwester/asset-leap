@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Sum
 
 
 class Statement(models.Model):
@@ -22,6 +23,14 @@ class Statement(models.Model):
             statement=self,
             type__contains='liab'
         )
+
+    @property
+    def total(self):
+        asset_value = self.assets.aggregate(Sum('value')).get('value__sum')
+        liability_value = self.liabilities.aggregate(
+            Sum('value')
+        ).get('value__sum')
+        return asset_value - liability_value
 
     class Meta:
         ordering = ("-date",)
