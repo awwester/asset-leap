@@ -23,7 +23,7 @@ class StatementsRoute extends React.Component {
   };
 
   createStatement = async () => {
-    const action = this.props.createStatement({ date: this.state.statementDate });
+    const action = await this.props.createStatement({ date: this.state.statementDate });
     if (action.type === CREATE_STATEMENTS_SUCCESS) {
       this.setState({ createMode: false });
       return toast('Statement created');
@@ -116,15 +116,18 @@ class StatementsRoute extends React.Component {
           </DashboardContainer>
         );
 
+
       return (
         <DashboardContainer>
-         {this.props.statements.data.map(statement => {
-           return <StatementItem
-            key={statement.id}
-            statement={statement}
-            onClick={() => this.props.history.push(`/dashboard/statements/${statement.id}`)}
-          />
-         })}
+          {this.props.statements.data.map(statement => {
+            return (
+              <StatementItem
+                key={statement.id}
+                statement={statement}
+                onClick={() => this.props.history.push(`/dashboard/statements/${statement.id}`)}
+              />
+            );
+          })}
         </DashboardContainer>
       )
     }

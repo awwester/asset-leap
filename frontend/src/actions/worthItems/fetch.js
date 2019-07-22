@@ -12,7 +12,7 @@ const fetchWorthItemsFailure = () => ({ type: FETCH_WORTH_ITEMS_FAILURE });
 
 export default () => (dispatch) => {
   dispatch(fetchWorthItemsStart());
-  const url = `${config.apiUrl}worth-items/`;
+  const url = `${config.apiUrl}worth-items/active/`;
 
   return axios.get(url).then(
     success => dispatch(fetchWorthItemsSuccess(success.data)),

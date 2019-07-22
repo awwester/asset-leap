@@ -8,7 +8,7 @@ export default ({ category }) => {
   return (
     <DashboardContainer>
       <FontAwesomeIcon icon={faExclamationCircle} className="warning-icon" />
-      You don't have any liabilities yet.
+      You don't have any {category} yet.
     </DashboardContainer>
   );
 }

@@ -18,11 +18,12 @@ export default (state = initialState, action) => {
     case CREATE_STATEMENTS_START:
       return { ...state, isLoading: true, error: '' };
     case DELETE_STATEMENT_START:
-      newData = newData.filter((statement) => statement.id !== action.statementId)
+      newData = newData.filter((statement) => statement.id !== action.statementId);
       return { ...state, data: newData };
     case FETCH_STATEMENTS_SUCCESS:
-    case CREATE_STATEMENTS_SUCCESS:
       return { ...state, isLoading: false, data: action.data };
+    case CREATE_STATEMENTS_SUCCESS:
+      return { ...state, isLoading: false, data: [ action.data, ...state.data ] };
     case FETCH_STATEMENTS_FAILURE:
     case CREATE_STATEMENTS_FAILURE:
       return { ...state, isLoading: false, error: action.error };

@@ -39,7 +39,8 @@ class ItemsTestMixin:
 
 
 class ItemsAPITestCase(ItemsTestMixin, BaseAPITestCase):
-    item_list_url = reverse('worthitem-list') + '?type=asset'
+    item_list_url = reverse('worthitem-list')
+    active_items_list_url = reverse('worthitem-active')
 
     asset_payload = {
         "name": "New Asset",
@@ -66,6 +67,18 @@ class ItemsAPITestCase(ItemsTestMixin, BaseAPITestCase):
         response = self.sally_client.post(self.item_list_url, self.liab_payload)
         self.assertEqual(response.status_code, 201)
         self.assertEqual(response.json().get('type'), Item.Type.CURRENT_LIAB)
+
+    def test_user_can_get_active_worth_items(self):
+        statement = mommy.make('statements.Statement', user=self.roger_user)
+        response = self.roger_client.get(self.active_items_list_url)
+        for item in response.json():
+            self.assertEqual(item.get("statement"), None)
+
+        self.roger_curr_asset1.statement = statement
+        self.roger_curr_asset1.save()
+        response = self.roger_client.get(self.active_items_list_url)
+        for item in response.json():
+            self.assertEqual(item.get("statement"), None)
 
     def test_user_cant_update_others_asset(self):
         asset_payload = {"name": "Sally Item"}

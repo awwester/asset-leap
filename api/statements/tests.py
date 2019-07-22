@@ -40,10 +40,14 @@ class StatementAPITestCase(ItemsTestMixin, StatementTestMixin, BaseAPITestCase):
 
     def test_user_can_create_a_statement(self):
         payload = {
-            "date": timezone.now().date()
+            "date": timezone.now().date() - timedelta(days=30)
         }
         response = self.roger_client.post(self.statement_list_url, payload)
         self.assertEqual(response.status_code, 201)
+        for asset in response.json().get('assets'):
+            self.assertEqual(asset.get('statement'), response.json().get('id'))
+        for liab in response.json().get('liabilities'):
+            self.assertEqual(liab.get('statement'), response.json().get('id'))
 
     def test_user_can_update_their_statement(self):
         new_date = timezone.now().date() - timedelta(days=10)

@@ -14,7 +14,7 @@ class LiabilitiesRoute extends React.Component {
     const liabilityData = this.props.worthItems.data.filter(item => item.category === 'liability');
     const renderEmptyLiabilities = () => {
       if (liabilityData.length === 0)
-        return <EmptyItemsContainer />;
+        return <EmptyItemsContainer category="liabilities" />;
     }
 
     const renderLiabilities = (liabilityType) => {

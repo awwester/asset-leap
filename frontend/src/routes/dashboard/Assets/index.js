@@ -14,7 +14,7 @@ class AssetsRoute extends React.Component {
     const assetData = this.props.worthItems.data.filter(item => item.category === "asset");
     const renderEmptyAssets = () => {
       if (assetData.length === 0)
-        return <EmptyItemsContainer category="liabilities" />;
+        return <EmptyItemsContainer category="assets" />;
     }
 
     const renderAssets = (assetType) => {
