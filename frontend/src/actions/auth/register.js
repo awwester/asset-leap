@@ -10,7 +10,7 @@ const registerSuccess = data => ({ type: REGISTER_SUCCESS, data });
 export const REGISTER_FAILURE = 'REGISTER_FAILURE';
 const registerFailure = data => ({ type: REGISTER_FAILURE, data });
 
-export default (payload) => {
+export default payload => {
   return dispatch => {
     dispatch(registerStart());
     const url = `${config.apiUrl}auth/registration/`;

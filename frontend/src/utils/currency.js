@@ -3,8 +3,8 @@ export default number => {
     style: 'currency',
     currency: 'USD',
     maximumFractionDigits: 0,
-    minimumFractionDigits: 0
+    minimumFractionDigits: 0,
   });
 
   return formatter.format(number);
-}
+};

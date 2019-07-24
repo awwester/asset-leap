@@ -19,3 +19,6 @@ shell:
 
 test:
 	docker-compose exec django ./manage.py test --noinput
+
+react_lint:
+	docker-compose exec frontend npm run lint

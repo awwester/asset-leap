@@ -27,8 +27,8 @@ class App extends React.Component {
   }
 
   render() {
-    if (this.state.isLoading)
-      return <LoadingContainer />
+    const { isLoading } = this.state;
+    if (isLoading) return <LoadingContainer />;
 
     return (
       <div className="app">
