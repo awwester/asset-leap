@@ -4,7 +4,7 @@ import axios from 'axios';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import Loading from 'components/Loading';
+import LoadingContainer from 'components/LoadingContainer';
 import fetchMe, { FETCH_ME_FAILURE } from 'actions/users/current/fetch';
 import logoutUser from 'actions/auth/logout';
 import Router from 'routes';
@@ -28,7 +28,7 @@ class App extends React.Component {
 
   render() {
     if (this.state.isLoading)
-      return <Loading />
+      return <LoadingContainer />
 
     return (
       <div className="app">

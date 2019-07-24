@@ -5,7 +5,7 @@ import { NavLink, Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFrog, faDollarSign, faHouseDamage, faLock, faChartLine } from '@fortawesome/free-solid-svg-icons';
 
-import Loading from 'components/Loading';
+import LoadingContainer from 'components/LoadingContainer';
 import fetchWorthItems from 'actions/worthItems/fetch';
 import fetchStatements from 'actions/statements/fetch';
 import logoutUser from 'actions/auth/logout';
@@ -46,7 +46,7 @@ class DashboardRouter extends React.Component {
 
   render() {
     if (!this.state.isReady)
-      return <Loading />;
+      return <LoadingContainer text="Loading Dashboard" />;
 
     return (
       <div className="dashboard-route">

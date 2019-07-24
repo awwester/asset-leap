@@ -23,7 +23,11 @@ export default (state = initialState, action) => {
     case FETCH_STATEMENTS_SUCCESS:
       return { ...state, isLoading: false, data: action.data };
     case CREATE_STATEMENTS_SUCCESS:
-      return { ...state, isLoading: false, data: [ action.data, ...state.data ] };
+      // Add the new date sorted by date.
+      newData = [ action.data, ...state.data ].sort(
+        (a,b) => new Date(b.date) - new Date(a.date)
+      );
+      return { ...state, isLoading: false, data: newData };
     case FETCH_STATEMENTS_FAILURE:
     case CREATE_STATEMENTS_FAILURE:
       return { ...state, isLoading: false, error: action.error };
