@@ -9,16 +9,17 @@ import Loading from 'components/Loading';
 import fetchWorthItems from 'actions/worthItems/fetch';
 import fetchStatements from 'actions/statements/fetch';
 import logoutUser from 'actions/auth/logout';
-import StatementsRoute from './Statements';
-import StatementDetailRoute from './StatementDetail';
+import StatementsRoute from './statements/List';
+import StatementDetailRoute from './statements/Detail';
+import StatementCreateRoute from './statements/Create';
 import AssetsRoute from './Assets';
 import LiabilitiesRoute from './Liabilities';
 import './style.scss';
 
 class DashboardRouter extends React.Component {
-  state = {
-    isReady: false
-  }
+  /* Router to handle all dashboard routes. */
+
+  state = { isReady: false }
 
   componentDidMount() {
     // Require authentication for the dashboard.
@@ -30,6 +31,7 @@ class DashboardRouter extends React.Component {
   }
 
   loadInitialData = async () => {
+    // All data that can be loaded before the dashboard is rendered should be loaded here.
     await Promise.all([
       this.props.fetchWorthItems(),
       this.props.fetchStatements()
@@ -72,6 +74,7 @@ class DashboardRouter extends React.Component {
 
         <section className="sidenav-layout-content">
           <Switch>
+            <Route exact path="/dashboard/statements/create" component={StatementCreateRoute} />
             <Route exact path="/dashboard/statements/:id" component={StatementDetailRoute} />
             <Route exact path="/dashboard/statements" component={StatementsRoute} />
             <Route exact path="/dashboard/assets" component={AssetsRoute} />

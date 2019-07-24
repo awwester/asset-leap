@@ -14,6 +14,8 @@ import { getUniqueTypes } from 'utils/worthItems';
 import formatCurrency from 'utils/currency';
 
 class DetailStatementContainer extends React.Component {
+  /* Show the details of a single statement. */
+  
   deleteStatement = () => {
     const { statement } = this.props;
     this.props.showModal('deleteStatement', { statement });
@@ -55,7 +57,7 @@ class DetailStatementContainer extends React.Component {
           <Col>
             <DashboardHeader>
               <Button color="link" onClick={() => this.props.history.push("/dashboard/statements")}>
-                <FontAwesomeIcon icon={faArrowLeft} /> All Statements
+                <FontAwesomeIcon icon={faArrowLeft} className="mr-2"/> All Statements
               </Button>
               <Button
                 outline
