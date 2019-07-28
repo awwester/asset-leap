@@ -1,0 +1,28 @@
+@import "styles/variables";
+
+.landing-route {
+  .greeting {
+    background-color: $primary;
+    border-top: 2px solid darken($primary, 10);
+    border-bottom: 2px solid lighten($primary, 15);
+  }
+
+  .features {
+    .row {
+      padding: 10rem 5rem;
+    }
+
+    .feature-summary {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      > h2 { text-align: center; }
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+}

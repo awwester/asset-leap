@@ -1,6 +1,9 @@
 @import "styles/variables";
 
 .landing-navbar {
+  background-color: $light;
+  border-bottom: 1px solid darken($light, 10);
+
   .home-icon {
     color: $primary;
   }

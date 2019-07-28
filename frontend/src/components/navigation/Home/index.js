@@ -25,14 +25,20 @@ class HomeNav extends React.Component {
         </NavbarToggler>
         <Collapse isOpen={this.state.isOpen} navbar>
           <Nav className="ml-auto" navbar>
-            <NavItem className="ml-5">
+            <NavItem>
               <Button
-                className="px-3"
+                color="link"
+                onClick={() => this.props.history.push('/auth/login')}
+                children="Login"
+              />
+            </NavItem>
+            <NavItem className="ml-4">
+              <Button
                 color="primary"
                 outline
-                onClick={() => this.props.history.push('/auth/login')}
-              > Login
-              </Button>
+                onClick={() => this.props.history.push('/auth/register')}
+                children="Get started"
+              />
             </NavItem>
           </Nav>
         </Collapse>
