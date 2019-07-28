@@ -1,11 +1,7 @@
 # Summary
-This is a starter project that is a great place to start handling a lot of the boilerplate of starting a new API project.
+This is an example project used to show my general coding principals, structure and design for building single page web applications.
 
-# Features
-- Docker
-- Django
-- Django Rest Framework
-- Authentication endpoints
+Users can track their net worth by entering asset and liability values and then view their net worth statements over time.
 
 # Install
 The only system requisites are docker and docker-compose, everything else is handled inside the docker container.
