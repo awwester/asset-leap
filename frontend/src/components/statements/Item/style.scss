@@ -2,16 +2,17 @@
 
 .statement-item-row {
   transition: 0.3s ease all;
-  .edit-item-icon {
-    display: none;
-
-    &:hover {
-      cursor: pointer;
-    }
-  }
 
   &:hover {
     background-color: lighten($secondary, 20);
-    .edit-item-icon { display: inline-block; }
+    cursor: pointer;
+  }
+
+  .worth-up {
+    color: $success;
+  }
+
+  .worth-down {
+    color: $danger;
   }
 }

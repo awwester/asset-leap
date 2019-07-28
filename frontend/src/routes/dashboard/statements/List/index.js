@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Button, Container } from 'reactstrap';
+import { Row, Col, Button, Container } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 
@@ -29,11 +29,24 @@ class StatementsRoute extends React.Component {
 
       return (
         <DashboardContainer>
+          <Row className="header-section p-3">
+            <Col children="Date" />
+            <Col children="Total" />
+            <Col children="Change" />
+          </Row>
+
           {this.props.statements.data.map(statement => {
+            const statements = this.props.statements.data;
+            const index = statements.findIndex(s => s.id === statement.id)
+            let previousStatement = null;
+            if (index < statements.length)
+              previousStatement = statements[index + 1]
+
             return (
               <StatementItem
                 key={statement.id}
                 statement={statement}
+                previousStatement={previousStatement}
                 onClick={() => this.props.history.push(`/dashboard/statements/${statement.id}`)}
               />
             );

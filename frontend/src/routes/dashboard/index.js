@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
 import { NavLink, Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFrog, faDollarSign, faHouseDamage, faLock, faChartLine } from '@fortawesome/free-solid-svg-icons';
+import { faFrog, faCog, faDollarSign, faHouseDamage, faLock, faChartLine } from '@fortawesome/free-solid-svg-icons';
 
 import LoadingContainer from 'components/LoadingContainer';
 import fetchWorthItems from 'actions/worthItems/fetch';
@@ -65,6 +65,9 @@ class DashboardRouter extends React.Component {
               <NavLink exact to="/dashboard/liabilities">
                 <FontAwesomeIcon icon={faHouseDamage} /> Liabilities
               </NavLink>
+              <Link to="/dashboard">
+                <FontAwesomeIcon icon={faCog} /> Settings
+              </Link>
               <Link to="/" onClick={this.logout}>
                 <FontAwesomeIcon icon={faLock} /> Logout
               </Link>
