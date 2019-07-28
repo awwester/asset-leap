@@ -1,0 +1,19 @@
+@import "styles/variables";
+
+.landing-navbar {
+  .home-icon {
+    color: $primary;
+  }
+
+  .navbar-brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    h1 {
+      font-size: 1.5rem;
+      display: inline;
+      margin: 0;
+    }
+  }
+}

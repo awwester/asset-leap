@@ -2,11 +2,11 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import {
   Button, Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem,
-  NavLink,
 } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faHome } from '@fortawesome/free-solid-svg-icons';
-import { toast } from 'react-toastify';
+import { faBars, faFrog } from '@fortawesome/free-solid-svg-icons';
+
+import './style.scss';
 
 class HomeNav extends React.Component {
   state = { isOpen: false }
@@ -17,22 +17,14 @@ class HomeNav extends React.Component {
     return (
       <Navbar className="landing-navbar" expand="md" fixed="top">
         <NavbarBrand>
-          <FontAwesomeIcon icon={faHome} />
+          <FontAwesomeIcon icon={faFrog} size="2x" className="home-icon" />
+          <h1 className="ml-5" children="Asset Leap" />
         </NavbarBrand>
         <NavbarToggler onClick={this.toggle}>
           <FontAwesomeIcon icon={faBars} />
         </NavbarToggler>
         <Collapse isOpen={this.state.isOpen} navbar>
           <Nav className="ml-auto" navbar>
-            <NavItem>
-              <NavLink onClick={() => toast('There are none yet.')}>Features</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink>Pricing</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink>Contact</NavLink>
-            </NavItem>
             <NavItem className="ml-5">
               <Button
                 className="px-3"
