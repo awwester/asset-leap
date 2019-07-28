@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Row, Col } from 'reactstrap';
+import { Container, Row, Col, Card, Button } from 'reactstrap';
 
 import RegisterForm from 'components/forms/Register';
 
@@ -10,9 +10,18 @@ class RegisterRoute extends React.Component {
         <Container>
           <Row>
             <Col sm={{size: 4, offset: 4}}>
-              <RegisterForm />
+              <Card>
+                <RegisterForm />
+              </Card>
             </Col>
           </Row>
+          <div className="footer-container text-center m-4">
+            <Button
+              color="link"
+              onClick={() => this.props.history.push("/auth/login")}
+              children="I already have an account"
+            />
+          </div>
         </Container>
       </div>
     );

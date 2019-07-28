@@ -21,6 +21,26 @@ const RegisterForm = props => {
     <Form onSubmit={handleSubmit} className="p-4">
       <FormGroup>
         <Input
+          placeholder="Email"
+          name="email"
+          tag={Field}
+          invalid={errors.email && touched.email}
+        />
+        <FormFeedback>{errors.email}</FormFeedback>
+      </FormGroup>
+
+      <FormGroup>
+        <Input
+          placeholder="Username"
+          name="username"
+          tag={Field}
+          invalid={errors.username && touched.username}
+        />
+        <FormFeedback>{errors.username}</FormFeedback>
+      </FormGroup>
+
+      <FormGroup>
+        <Input
           placeholder="First Name"
           name="firstName"
           tag={Field}
@@ -37,26 +57,6 @@ const RegisterForm = props => {
           invalid={errors.lastName && touched.lastName}
         />
         <FormFeedback>{errors.lastName}</FormFeedback>
-      </FormGroup>
-
-      <FormGroup>
-        <Input
-          placeholder="Email"
-          name="email"
-          tag={Field}
-          invalid={errors.email && touched.email}
-        />
-        <FormFeedback>{errors.email}</FormFeedback>
-      </FormGroup>
-
-      <FormGroup>
-        <Input
-          placeholder="username"
-          name="username"
-          tag={Field}
-          invalid={errors.username && touched.username}
-        />
-        <FormFeedback>{errors.username}</FormFeedback>
       </FormGroup>
 
       <FormGroup>

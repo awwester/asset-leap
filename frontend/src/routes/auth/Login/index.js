@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Row, Col } from 'reactstrap';
+import { Container, Row, Col, Card, Button } from 'reactstrap';
 
 import LoginForm from 'components/forms/Login';
 
@@ -10,9 +10,18 @@ class LoginRoute extends React.Component {
         <Container>
           <Row>
             <Col sm={{size: 4, offset: 4}}>
-              <LoginForm />
+              <Card>
+                <LoginForm />
+              </Card>
             </Col>
           </Row>
+          <div className="footer-container text-center m-4">
+          <Button
+            color="link"
+            onClick={() => this.props.history.push("/auth/register")}
+            children="Create new account"
+          />
+          </div>
         </Container>
       </div>
     );

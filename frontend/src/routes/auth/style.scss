@@ -1,0 +1,13 @@
+@import "styles/variables";
+
+.auth-route-container {
+  .icon-container {
+    width: 100%;
+    text-align: center;
+  }
+
+  .auth-route-icon {
+    color: $primary;
+  }
+
+}
