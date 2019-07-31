@@ -8,7 +8,7 @@ The only system requisites are docker and docker-compose, everything else is han
 
 1) `make setup` (or run the setup commands in Makefile if you don't have make installed.)
 2) `docker-compose up`
-3) `docker-compose exec django ./manage.py migrate`
+3) `make migrate`
 
 # Usage
 

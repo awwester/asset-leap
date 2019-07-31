@@ -1,5 +1,5 @@
 setup:
-	cp .env.example .env
+	cp api/.env.example api/.env
 	cp api/api/settings/local_example.py api/api/settings/local.py
 
 # When django-admin creates files (makemigrations, startapp, etc) we need to own
