@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col } from 'reactstrap';
+import { Container, Row, Col } from 'reactstrap';
 
 import HomeNav from 'components/navigation/Home';
 import './style.scss';
@@ -8,9 +8,9 @@ class LandingRoute extends React.Component {
   render() {
     return (
       <div className="landing-route">
-        <HomeNav />
+        <HomeNav /> 
 
-        <section className="features">
+        <Container className="features">
           <Row>
             <Col sm={8}>
               <img src="/images/statements.png" className="shadow-lg" alt="personal net worth statements"/>
@@ -40,7 +40,7 @@ class LandingRoute extends React.Component {
               <p>Each period you can view the details of what your assets and liabilities were at that time.</p>
             </Col>
           </Row>
-        </section>
+        </Container>
       </div>
     )
   }

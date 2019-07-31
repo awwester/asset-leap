@@ -8,8 +8,11 @@
   }
 
   .features {
+    margin-top: 5rem;
+
     .row {
-      padding: 10rem 5rem;
+      padding-top: 5rem;
+      padding-bottom: 5rem;
     }
 
     .feature-summary {
@@ -23,6 +26,19 @@
     img {
       width: 100%;
       height: auto;
+    }
+  }
+}
+
+@media(max-width: $screen-sm) {
+  .landing-route {
+    .features {
+      margin-top: 0;
+
+      img { 
+        margin-top: 2rem;
+        margin-bottom: 2rem; 
+      }
     }
   }
 }

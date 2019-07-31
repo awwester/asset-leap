@@ -17,8 +17,12 @@ class HomeNav extends React.Component {
     return (
       <Navbar className="landing-navbar" expand="md" fixed="top">
         <NavbarBrand>
-          <FontAwesomeIcon icon={faFrog} size="2x" className="home-icon" />
-          <h1 className="ml-5" children="Asset Leap" />
+          <FontAwesomeIcon
+            icon={faFrog}
+            size="2x"
+            className="home-icon"
+          />
+          <h1 className="ml-5">Asset Leap</h1>
         </NavbarBrand>
         <NavbarToggler onClick={this.toggle}>
           <FontAwesomeIcon icon={faBars} />
@@ -29,16 +33,18 @@ class HomeNav extends React.Component {
               <Button
                 color="link"
                 onClick={() => this.props.history.push('/auth/login')}
-                children="Login"
-              />
+              >
+                Login
+              </Button>
             </NavItem>
             <NavItem className="ml-4">
               <Button
                 color="primary"
                 outline
                 onClick={() => this.props.history.push('/auth/register')}
-                children="Get started"
-              />
+              >
+                Get started
+              </Button>
             </NavItem>
           </Nav>
         </Collapse>
